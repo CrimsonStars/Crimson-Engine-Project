@@ -1,0 +1,40 @@
+<events>
+	<event id="STRING_EVENT_00">
+		<!-- Will be written in both versions:
+	* simple parsable string
+	* XML format
+	For simple uses the XML might be better, but for complex ones
+	the string can be a little more readable. Need to think about
+	the standard for this "language". :)
+	-->
+	</event>
+	<event id="XML_EVENT_001">
+		<actions>
+			<action type="GIVE">
+				solter_item
+			</action>
+		</actions>
+		<reactions>
+			<reaction type="GIVE">
+				beton_00
+			</reaction>
+		</reactions>
+		<text>
+			Lorem ipsum...
+		</text>
+	</event>
+	<event>
+		<!--
+	Can be mixed! Let's say it'll be a mixture of OVERALL XML,
+	but actions/reactions will be written in parsable string
+	format of my type. Complex, but will be suitable for both
+	setting standard and readibility.
+	-->
+		<actions type="text">
+			GIVE 'solter_item';
+		</actions>
+		<reactions type="text"> 
+			REMOVE 'beton_002';
+		</reactions>
+	</event>
+</events>

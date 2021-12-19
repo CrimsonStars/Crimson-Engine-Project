@@ -1,0 +1,46 @@
+<items>
+	<item id="id co tam">
+		<name>Wooden hammer</name>
+		<type>ACTIVE</type>
+		<weight>0.5</weight>
+		<price>10.99</price>
+		<descriptions count="1">
+			<!-- attribute COUNT is optional -->
+			<desc>
+				<!-- 
+				The '|' symbol will be used for NEW LINES in text.
+				It'll be availiable ONLY in game.
+				-->
+				Simple and powerfull tool for hitting things or creatures.|
+				The last one is not really recommended.
+			</desc>
+		</descriptions>
+		<active_area count="1">
+			<!-- attribute COUNT is optional -->
+				10.0,10.0;
+				10.0,40.4;
+				20.0,40.0;
+				20.0,10.0;
+		</active_area>
+		<events>
+			<!-- 
+				Normally you specify id's of events. We store them
+				in another file BUT they can be written down here as well.
+				Need to think about this, but for now we'll write them in
+				XML files. 
+				-->
+		</events>
+	</item>
+  <!-- This one was generated in c# -->
+  <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="80da100f-d707-4631-b62b-18ca3ba41e8f.ITEM">
+    <descriptions>
+      <desc>A very rusty knife.</desc>
+      <desc>This knife sure is rusty and useless.|Yet...</desc>
+    </descriptions>
+    <name>Rusty knife</name>
+    <weight>0.02</weight>
+    <type>ACTIVE</type>
+    <active_area>5,5;20,5.0;10,15;</active_area>
+  </item>
+	<!-- more to come -->
+</items>
