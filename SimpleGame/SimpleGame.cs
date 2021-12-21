@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Input;
+using SimpleGame.Game_objects.GUI;
 using System.Collections.Generic;
 
 namespace CrimsonEngine.GL
@@ -13,6 +14,8 @@ namespace CrimsonEngine.GL
         private SpriteBatch _spriteBatch;
         private World GameWorld;
         private int TotalFrameCount;
+
+        public GuiComposition GuiElements;
 
 
         #region Console variables and stuff
@@ -65,13 +68,16 @@ namespace CrimsonEngine.GL
         public SimpleGame()
         {
             _graphics = new GraphicsDeviceManager(this);
+
+            _graphics.PreferredBackBufferWidth = Properties.Instance.Width;
+            _graphics.PreferredBackBufferHeight = Properties.Instance.Height;
+            _graphics.ApplyChanges();
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
-            LibGlobals.SetParameters(_spriteBatch, _graphics, Content, 60);
+            LibGlobals.LibGraphicsDeviceManager = _graphics;
 
-            GameWorld = new World();
-
+            
 
             //tt = new TajmerTemp(.350f);
 
@@ -88,20 +94,10 @@ namespace CrimsonEngine.GL
 
         protected override void Initialize()
         {
+            
             // TODO: Add your initialization logic here
 
             // setup WxH of window
-            _graphics.PreferredBackBufferWidth = Properties.Instance.Width;
-            _graphics.PreferredBackBufferHeight = Properties.Instance.Height;
-            _graphics.ApplyChanges();
-
-            Mouse.SetCursor(
-                MouseCursor.FromTexture2D(Content.Load<Texture2D>(@"sprites\amiga_mouse_cursor"),
-                0, 0)
-                );
-
-
-            
 
             base.Initialize();
         }
@@ -109,10 +105,26 @@ namespace CrimsonEngine.GL
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            LibGlobals.LibSpriteBatch = _spriteBatch;
+            LibGlobals.LibContentManager = Content;
 
+            Mouse.SetCursor(
+                MouseCursor.FromTexture2D(Content.Load<Texture2D>(@"sprites\amiga_mouse_cursor"),
+                0, 0)
+                );
+
+
+
+
+            
 
             // TODO: use this.Content to load your game content here
+
+            GameWorld = new World();
             GameWorld.GenerateWorld();
+
+            GuiElements = new GuiComposition();
+            GuiElements.AddButton(new Button2D("Not now", @"pixel", new Vector2(100, 100), new Vector2(100, 65)));
         }
 
         protected override void Update(GameTime gameTime)
@@ -122,6 +134,7 @@ namespace CrimsonEngine.GL
             updateKeyboardAndMouseState();
             GameWorld.Update();
 
+            GuiElements.Update();
 
 
 
@@ -141,7 +154,6 @@ namespace CrimsonEngine.GL
             //Console.Write(String.Format("{0}\r", tt.GetCurrentState()));
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            GameWorld.Draw();
 
             // TODO: Add your drawing code here
 
@@ -149,6 +161,8 @@ namespace CrimsonEngine.GL
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
             //_spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
 
+            GameWorld.Draw();
+            GuiElements.Draw();
 
             TotalFrameCount++;
             if (TotalFrameCount % 30 == 0)

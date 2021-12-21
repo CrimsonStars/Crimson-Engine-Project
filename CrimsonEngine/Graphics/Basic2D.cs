@@ -7,7 +7,7 @@ namespace CrimsonEngine.Graphics
     /// <summary>
     /// Basic static sprite in 2D with no movement or animation.
     /// </summary>
-    class Basic2D : IBasicUpdate, IBasicDraw
+    public class Basic2D : IBasicUpdate, IBasicDraw
     {
         public Texture2D Texture { get; set; }
         public float Transparency { get; set; }

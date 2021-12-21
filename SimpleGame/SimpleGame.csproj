@@ -50,6 +50,8 @@
     <Compile Include="Game objects\CurrentState.cs" />
     <Compile Include="Game objects\GameAction.cs" />
     <Compile Include="Game objects\GanmeStatus.cs" />
+    <Compile Include="Game objects\GUI\Button2D.cs" />
+    <Compile Include="Game objects\GUI\GuiComposition.cs" />
     <Compile Include="Game objects\obiekty\Item.cs" />
     <Compile Include="Game objects\obiekty\MultipleItems.cs" />
     <Compile Include="Game objects\obiekty\MultipleRooms.cs" />
@@ -61,7 +63,6 @@
     <Compile Include="Game objects\Testing Game Objects\Creature.cs" />
     <Compile Include="Game objects\Testing Game Objects\CreatureType.cs" />
     <Compile Include="Game objects\World.cs" />
-    <Compile Include="Game1.cs" />
     <Compile Include="GameStates.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Program.cs" />
