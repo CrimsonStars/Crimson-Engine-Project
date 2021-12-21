@@ -61,6 +61,19 @@ namespace CrimsonEngine.SimpleGame
             }
         }
 
+        public IEnumerable<(string,string)> GetDirections()
+        {
+            List<(string, string)> result;
+            result= new List<(string,string)>();
+
+            foreach(var i in Directions)
+            {
+
+            }
+
+            return result;
+        }
+
         public string GetMap()
         {
             string result = String.Format("ROOM '{0}' MAP:\n", this.Id);

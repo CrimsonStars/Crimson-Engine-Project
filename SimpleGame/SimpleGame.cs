@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Input;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace CrimsonEngine.GL
 {
@@ -29,6 +30,15 @@ namespace CrimsonEngine.GL
 
         KeyboardStateExtended newKSE, oldKSE;
 
+        
+
+
+        private void InterpreteCommand(string INPUT)
+        {
+            Regex rx = new Regex(@"\w+",
+          RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            MatchCollection matches = rx.Matches(INPUT);
+        }
 
 
         void updateKeyboardAndMouseState()
@@ -129,6 +139,12 @@ namespace CrimsonEngine.GL
                 || GameWorld.GAME_STATE == GameStates.EXIT)
             {
                 Exit();
+            } else if (newKS.IsKeyDown(Keys.OemTilde))
+            {
+                InterpreteCommand( System.Console.ReadLine());
+            } else
+            {
+                GameWorld.Update();
             }
 
             base.Update(gameTime);
@@ -159,6 +175,7 @@ namespace CrimsonEngine.GL
                 TotalFrameCount = 0;
             }
 
+            GameWorld.Draw();
 
             base.Draw(gameTime);
             _spriteBatch.End();
