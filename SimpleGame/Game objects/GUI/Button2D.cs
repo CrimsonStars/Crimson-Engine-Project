@@ -20,6 +20,7 @@ namespace SimpleGame.Game_objects.GUI
             Label = LABEL;
         }
 
+
         public void WasButtonClicked()
         {
 

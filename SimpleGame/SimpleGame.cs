@@ -2,9 +2,14 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MLEM.Misc;
+using MLEM.Ui;
+using MLEM.Ui.Elements;
+using MLEM.Ui.Style;
 using MonoGame.Extended.Input;
 using SimpleGame.Game_objects.GUI;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CrimsonEngine.GL
 {
@@ -14,7 +19,7 @@ namespace CrimsonEngine.GL
         private SpriteBatch _spriteBatch;
         private World GameWorld;
         private int TotalFrameCount;
-
+        public UiSystem UiSystem;
         public GuiComposition GuiElements;
 
 
@@ -114,10 +119,6 @@ namespace CrimsonEngine.GL
                 );
 
 
-
-
-            
-
             // TODO: use this.Content to load your game content here
 
             GameWorld = new World();
@@ -125,6 +126,16 @@ namespace CrimsonEngine.GL
 
             GuiElements = new GuiComposition();
             GuiElements.AddButton(new Button2D("Not now", @"pixel", new Vector2(100, 100), new Vector2(100, 65)));
+            GuiElements.Buttons.Last().ClickAction = 
+                () => { GameWorld.GAME_STATE = GameStates.EXIT; };
+
+            SpriteFont sf = Content.Load<SpriteFont>("PressStart2P");
+
+            UiSystem = new UiSystem(this, new UntexturedStyle(_spriteBatch));
+            var panel = new Panel(Anchor.Center, new Vector2(100, 200), Vector2.Zero);
+            var butt = new Button(Anchor.Center, new Vector2(50, 20), "Siemka");
+            UiSystem.Add("Test",panel);
+            UiSystem.Add("Test button",butt);
         }
 
         protected override void Update(GameTime gameTime)
@@ -136,13 +147,15 @@ namespace CrimsonEngine.GL
 
             GuiElements.Update();
 
-
+            UiSystem.Update(gameTime);
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || newKS.IsKeyDown(Keys.Escape)
                 || GameWorld.GAME_STATE == GameStates.EXIT)
             {
                 Exit();
             }
+
+
 
             base.Update(gameTime);
 
@@ -151,6 +164,7 @@ namespace CrimsonEngine.GL
 
         protected override void Draw(GameTime gameTime)
         {
+            this.UiSystem.DrawEarly(gameTime, this._spriteBatch);
             //Console.Write(String.Format("{0}\r", tt.GetCurrentState()));
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
@@ -173,9 +187,11 @@ namespace CrimsonEngine.GL
                 TotalFrameCount = 0;
             }
 
-
+            
             base.Draw(gameTime);
+
             _spriteBatch.End();
+            this.UiSystem.Draw(gameTime, _spriteBatch);
             //Console.Write($"Elapsed time:\t{gameTime.ElapsedGameTime}\r");
         }
     }
