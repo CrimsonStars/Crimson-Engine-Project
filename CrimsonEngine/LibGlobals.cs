@@ -25,7 +25,7 @@ namespace CrimsonEngine
         {
             LibGraphicsDeviceManager = GRAPHICS_DEVICE_MANAGER;
             LibTotalFrameCount = FRAMERATE;
-            LibGraphicsDeviceManager = GRAPHICS_DEVICE_MANAGER;
+            LibSpriteBatch = SPRITE_BATCH;
             LibContentManager = CONTENT_MANAGER;
         }
     }

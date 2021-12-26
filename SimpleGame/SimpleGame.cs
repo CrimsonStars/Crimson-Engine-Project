@@ -131,11 +131,17 @@ namespace CrimsonEngine.GL
 
             SpriteFont sf = Content.Load<SpriteFont>("PressStart2P");
 
-            UiSystem = new UiSystem(this, new UntexturedStyle(_spriteBatch));
+            UiStyle uiStyle = new UiStyle();
+            uiStyle.Font = new MLEM.Font.GenericSpriteFont(Content.Load<SpriteFont>("PressStart2P"));
+            
+
+            Content.Load<SpriteFont>("PressStart2P");
+
+            UiSystem = new UiSystem(this, uiStyle); //new UntexturedStyle(_spriteBatch));
             var panel = new Panel(Anchor.Center, new Vector2(100, 200), Vector2.Zero);
             var butt = new Button(Anchor.Center, new Vector2(50, 20), "Siemka");
             UiSystem.Add("Test",panel);
-            UiSystem.Add("Test button",butt);
+            UiSystem.Add("gyujg", butt);
         }
 
         protected override void Update(GameTime gameTime)
