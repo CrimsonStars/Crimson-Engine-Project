@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MLEM.Misc;
+using MLEM.Textures;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
 using MLEM.Ui.Style;
@@ -131,17 +132,18 @@ namespace CrimsonEngine.GL
 
             SpriteFont sf = Content.Load<SpriteFont>("PressStart2P");
 
+            #region UiSystem gui tests
             UiStyle uiStyle = new UiStyle();
             uiStyle.Font = new MLEM.Font.GenericSpriteFont(Content.Load<SpriteFont>("PressStart2P"));
-            
+            uiStyle.TextScale = 1.0f;
+            uiStyle.PanelTexture = new NinePatch(new TextureRegion(Content.Load<Texture2D>(@"sprites\amiga_mouse_cursor"), 0, 0, 8, 8), 0);
 
-            Content.Load<SpriteFont>("PressStart2P");
-
-            UiSystem = new UiSystem(this, uiStyle); //new UntexturedStyle(_spriteBatch));
+            UiSystem = new UiSystem(this, new UntexturedStyle(_spriteBatch));
+            UiSystem = new UiSystem(this, uiStyle);
             var panel = new Panel(Anchor.Center, new Vector2(100, 200), Vector2.Zero);
-            var butt = new Button(Anchor.Center, new Vector2(50, 20), "Siemka");
+            var butt = new Button(Anchor.Center, new Vector2(50, 20), "Lorem ipsum");
             UiSystem.Add("Test",panel);
-            UiSystem.Add("gyujg", butt);
+            #endregion
         }
 
         protected override void Update(GameTime gameTime)
