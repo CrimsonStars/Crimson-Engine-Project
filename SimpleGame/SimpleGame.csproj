@@ -52,6 +52,7 @@
     <Compile Include="Game objects\GanmeStatus.cs" />
     <Compile Include="Game objects\GUI\Button2D.cs" />
     <Compile Include="Game objects\GUI\GuiComposition.cs" />
+    <Compile Include="Game objects\GUI\TempMLEMGui.cs" />
     <Compile Include="Game objects\obiekty\Item.cs" />
     <Compile Include="Game objects\obiekty\MultipleItems.cs" />
     <Compile Include="Game objects\obiekty\MultipleRooms.cs" />

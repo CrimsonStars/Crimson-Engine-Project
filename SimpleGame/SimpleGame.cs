@@ -22,6 +22,7 @@ namespace CrimsonEngine.GL
         private int TotalFrameCount;
         public UiSystem UiSystem;
         public GuiComposition GuiElements;
+        public TempMLEMGui SimpleMlemGui;
 
 
         #region Console variables and stuff
@@ -74,16 +75,14 @@ namespace CrimsonEngine.GL
         public SimpleGame()
         {
             _graphics = new GraphicsDeviceManager(this);
-
             _graphics.PreferredBackBufferWidth = Properties.Instance.Width;
             _graphics.PreferredBackBufferHeight = Properties.Instance.Height;
             _graphics.ApplyChanges();
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
-            LibGlobals.LibGraphicsDeviceManager = _graphics;
 
-            
+            LibGlobals.LibGraphicsDeviceManager = _graphics;
 
             //tt = new TajmerTemp(.350f);
 
@@ -100,7 +99,7 @@ namespace CrimsonEngine.GL
 
         protected override void Initialize()
         {
-            
+
             // TODO: Add your initialization logic here
 
             // setup WxH of window
@@ -127,23 +126,13 @@ namespace CrimsonEngine.GL
 
             GuiElements = new GuiComposition();
             GuiElements.AddButton(new Button2D("Not now", @"pixel", new Vector2(100, 100), new Vector2(100, 65)));
-            GuiElements.Buttons.Last().ClickAction = 
+            GuiElements.Buttons.Last().ClickAction =
                 () => { GameWorld.GAME_STATE = GameStates.EXIT; };
 
             SpriteFont sf = Content.Load<SpriteFont>("PressStart2P");
 
-            #region UiSystem gui tests
-            UiStyle uiStyle = new UiStyle();
-            uiStyle.Font = new MLEM.Font.GenericSpriteFont(Content.Load<SpriteFont>("PressStart2P"));
-            uiStyle.TextScale = 1.0f;
-            uiStyle.PanelTexture = new NinePatch(new TextureRegion(Content.Load<Texture2D>(@"sprites\amiga_mouse_cursor"), 0, 0, 8, 8), 0);
+            SimpleMlemGui = new TempMLEMGui(this, Content);
 
-            UiSystem = new UiSystem(this, new UntexturedStyle(_spriteBatch));
-            UiSystem = new UiSystem(this, uiStyle);
-            var panel = new Panel(Anchor.Center, new Vector2(100, 200), Vector2.Zero);
-            var butt = new Button(Anchor.Center, new Vector2(50, 20), "Lorem ipsum");
-            UiSystem.Add("Test",panel);
-            #endregion
         }
 
         protected override void Update(GameTime gameTime)
@@ -152,34 +141,25 @@ namespace CrimsonEngine.GL
 
             updateKeyboardAndMouseState();
             GameWorld.Update();
-
             GuiElements.Update();
 
-            UiSystem.Update(gameTime);
-
+            #region Manage inputs (keyboard or mouse)
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || newKS.IsKeyDown(Keys.Escape)
                 || GameWorld.GAME_STATE == GameStates.EXIT)
             {
                 Exit();
             }
+            #endregion
 
-
-
+            SimpleMlemGui.Update(gameTime);
             base.Update(gameTime);
-
-            
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            this.UiSystem.DrawEarly(gameTime, this._spriteBatch);
             //Console.Write(String.Format("{0}\r", tt.GetCurrentState()));
+            SimpleMlemGui.DrawEarly(gameTime, _spriteBatch);
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-
-            // TODO: Add your drawing code here
-
-            //_spriteBatch.Begin();
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
             //_spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
 
@@ -195,11 +175,9 @@ namespace CrimsonEngine.GL
                 TotalFrameCount = 0;
             }
 
-            
             base.Draw(gameTime);
-
             _spriteBatch.End();
-            this.UiSystem.Draw(gameTime, _spriteBatch);
+            SimpleMlemGui.Draw(gameTime, _spriteBatch);
             //Console.Write($"Elapsed time:\t{gameTime.ElapsedGameTime}\r");
         }
     }
