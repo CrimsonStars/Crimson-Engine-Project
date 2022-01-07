@@ -2,15 +2,15 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using MLEM.Misc;
-using MLEM.Textures;
-using MLEM.Ui;
-using MLEM.Ui.Elements;
-using MLEM.Ui.Style;
 using MonoGame.Extended.Input;
 using SimpleGame.Game_objects.GUI;
 using System.Collections.Generic;
 using System.Linq;
+using MonoGame.ImGui;
+using ImGuiNET;
+using MonoGame.Extended;
+using MonoGame.Extended.Gui;
+using MonoGame.Extended.Gui.Controls;
 
 namespace CrimsonEngine.GL
 {
@@ -20,25 +20,14 @@ namespace CrimsonEngine.GL
         private SpriteBatch _spriteBatch;
         private World GameWorld;
         private int TotalFrameCount;
-        public UiSystem UiSystem;
-        public GuiComposition GuiElements;
-        public TempMLEMGui SimpleMlemGui;
+        private ImGuiDebug DebugGui;
 
-
-        #region Console variables and stuff
-        private const string CommandCursor = "> ";
-        private List<string> CommandHistory = new List<string>(5);
-        private string actualInputStringCommand = "";
-        private Texture2D consoleBackground;
-        #endregion
 
         SpriteFont sf;
         KeyboardState previousKS, newKS;
         TajmerTemp tt;
         MouseStateExtended LastMS, CurrentMS;
-
         KeyboardStateExtended newKSE, oldKSE;
-
 
 
         void updateKeyboardAndMouseState()
@@ -94,15 +83,15 @@ namespace CrimsonEngine.GL
             //tt.Start();
 
             TotalFrameCount = 0;
+
+            
         }
 
 
         protected override void Initialize()
         {
-
             // TODO: Add your initialization logic here
-
-            // setup WxH of window
+            DebugGui = new ImGuiDebug(this);
 
             base.Initialize();
         }
@@ -118,22 +107,9 @@ namespace CrimsonEngine.GL
                 0, 0)
                 );
 
-
-            // TODO: use this.Content to load your game content here
-
             GameWorld = new World();
             GameWorld.GenerateWorld();
-
-            GuiElements = new GuiComposition();
-            GuiElements.AddButton(new Button2D("Not now", @"pixel", new Vector2(100, 100), new Vector2(100, 65)));
-            GuiElements.Buttons.Last().ClickAction =
-                () => { GameWorld.GAME_STATE = GameStates.EXIT; };
-
-            SpriteFont sf = Content.Load<SpriteFont>("PressStart2P");
-
-            SimpleMlemGui = new TempMLEMGui(this, Content);
-
-        }
+}
 
         protected override void Update(GameTime gameTime)
         {
@@ -141,7 +117,6 @@ namespace CrimsonEngine.GL
 
             updateKeyboardAndMouseState();
             GameWorld.Update();
-            GuiElements.Update();
 
             #region Manage inputs (keyboard or mouse)
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || newKS.IsKeyDown(Keys.Escape)
@@ -151,20 +126,17 @@ namespace CrimsonEngine.GL
             }
             #endregion
 
-            SimpleMlemGui.Update(gameTime);
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
             //Console.Write(String.Format("{0}\r", tt.GetCurrentState()));
-            SimpleMlemGui.DrawEarly(gameTime, _spriteBatch);
             GraphicsDevice.Clear(Color.CornflowerBlue);
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
             //_spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
 
             GameWorld.Draw();
-            GuiElements.Draw();
 
             TotalFrameCount++;
             if (TotalFrameCount % 30 == 0)
@@ -175,9 +147,13 @@ namespace CrimsonEngine.GL
                 TotalFrameCount = 0;
             }
 
+            DebugGui.Draw(gameTime);
+
             base.Draw(gameTime);
             _spriteBatch.End();
-            SimpleMlemGui.Draw(gameTime, _spriteBatch);
+
+            
+            //SimpleMlemGui.Draw(gameTime, _spriteBatch);
             //Console.Write($"Elapsed time:\t{gameTime.ElapsedGameTime}\r");
         }
     }

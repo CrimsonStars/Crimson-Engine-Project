@@ -19,8 +19,8 @@ namespace CrimsonEngine.SimpleGame
         private Properties()
         {
             Framerate = 60;
-            Height = 320;
-            Width = 640;
+            Height = 768;
+            Width = 1024;
             WindowTitle = "Single game - Tests - Crimson Engine";
 
             Version = String.Format("{0}.{1}.{2}", 0, 0, 1);
