@@ -81,8 +81,8 @@ namespace CrimsonEngine.Simple_math
                 double a = _vertices[i].Y;
                 double b = _vertices[(i + 1) % _vertices.Count].Y;
 
-                result += 
-                    Math.Sign(_vertices[(i + 1) % _vertices.Count].Y - _vertices[i].X) 
+                result +=
+                    Math.Sign(_vertices[(i + 1) % _vertices.Count].Y - _vertices[i].X)
                     * BasicOperations.TrapezoidumArea(height, a, b);
             }
 
@@ -136,7 +136,7 @@ namespace CrimsonEngine.Simple_math
                 LibGlobals.LibSpriteBatch.DrawLine(
                     (Vector2) _vertices[i],
                     (Vector2) _vertices[(i + 1) % _vertices.Count],
-                    Color.Red
+                    Color.Red, 2
                     );
             }
         }

@@ -11,6 +11,7 @@ using ImGuiNET;
 using MonoGame.Extended;
 using MonoGame.Extended.Gui;
 using MonoGame.Extended.Gui.Controls;
+using CrimsonEngine.Graphics.GUI;
 
 namespace CrimsonEngine.GL
 {
@@ -22,22 +23,27 @@ namespace CrimsonEngine.GL
         private int TotalFrameCount;
         private ImGuiDebug DebugGui;
 
+        private GuiContainer2D guiCont=new GuiContainer2D();
+
 
         SpriteFont sf;
-        KeyboardState previousKS, newKS;
         TajmerTemp tt;
+        KeyboardState previousKS, newKS;
         MouseStateExtended LastMS, CurrentMS;
         KeyboardStateExtended newKSE, oldKSE;
+        private bool WasMouseClicked = false;
 
 
         void updateKeyboardAndMouseState()
         {
             previousKS = newKS;
             newKS = Keyboard.GetState();
-
             oldKSE = newKSE;
             newKSE = KeyboardExtended.GetState();
 
+            WasMouseClicked = 
+                CurrentMS.IsButtonDown(MouseButton.Left) && !LastMS.IsButtonDown(MouseButton.Left);
+            
             LastMS = CurrentMS;
             CurrentMS = MonoGame.Extended.Input.MouseExtended.GetState();
         }
@@ -83,10 +89,8 @@ namespace CrimsonEngine.GL
             //tt.Start();
 
             TotalFrameCount = 0;
-
             
         }
-
 
         protected override void Initialize()
         {
@@ -109,14 +113,17 @@ namespace CrimsonEngine.GL
 
             GameWorld = new World();
             GameWorld.GenerateWorld();
-}
+
+            guiCont.AddLabel(Vector2.Zero, "Nope");
+            guiCont.AddLabel(new Vector2(10,80), "Siemka, co tam?",Color.Red, GuiContainer2D.Layer.SECOND);
+        }
 
         protected override void Update(GameTime gameTime)
         {
             var PressedKeys = newKS.GetPressedKeys();
 
-            updateKeyboardAndMouseState();
             GameWorld.Update();
+            guiCont.Update();
 
             #region Manage inputs (keyboard or mouse)
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || newKS.IsKeyDown(Keys.Escape)
@@ -124,6 +131,14 @@ namespace CrimsonEngine.GL
             {
                 Exit();
             }
+
+            if(WasMouseClicked)
+            {
+                System.Console.WriteLine("Siema . . .");
+            }
+            
+
+            updateKeyboardAndMouseState();
             #endregion
 
             base.Update(gameTime);
@@ -137,6 +152,7 @@ namespace CrimsonEngine.GL
             //_spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
 
             GameWorld.Draw();
+            guiCont.Draw();
 
             TotalFrameCount++;
             if (TotalFrameCount % 30 == 0)
@@ -148,6 +164,8 @@ namespace CrimsonEngine.GL
             }
 
             DebugGui.Draw(gameTime);
+
+            guiCont.Draw();
 
             base.Draw(gameTime);
             _spriteBatch.End();
