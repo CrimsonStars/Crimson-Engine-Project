@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace CrimsonEngine.Graphics.GUI
 {
-    public class GuiContainer2D:IBasicUpdate,IBasicDraw
+    public class GuiContainer2D : IBasicUpdate, IBasicDraw
     {
         private Texture2D GuiRender;
 
@@ -22,23 +22,29 @@ namespace CrimsonEngine.Graphics.GUI
 
         #region Fields
         private List<(Layer LayerName, Button2D Element)> Buttons;
-        private List<(Layer LayerName, Label2D Element)> Texts;
+        private List<(Layer LayerName, Label2D Element)> Labels;
         private List<(Layer LayerName, Basic2D Element)> Sprites;
+        public bool ClickWasPerformed { get; set; } = false;
         #endregion
 
         #region Constructors
         public GuiContainer2D()
         {
             Buttons = new List<(Layer LayerName, Button2D Element)>();
-            Texts = new List<(Layer LayerName, Label2D Element)>();
+            Labels = new List<(Layer LayerName, Label2D Element)>();
             Sprites = new List<(Layer LayerName, Basic2D Element)>();
         }
         #endregion
 
         #region Public methods
-        public void AddButton(Vector2 POSITION, Layer LAYER = Layer.FIRST)
+        public void AddButton(Vector2 POSITION, Vector2 DIMS, string TEXTUREPATH, string LABEL, Action CLICK_ACTIOM, Layer LAYER = Layer.FIRST)
         {
             Button2D element = new Button2D();
+            element.ClickAction = CLICK_ACTIOM;
+            element.Texture = LibGlobals.LibContentManager.Load<Texture2D>(TEXTUREPATH);
+            element.Label = new Label2D(LABEL, POSITION, Color.Green);
+            element.Position = POSITION;
+            element.Dimensions = DIMS;
             Buttons.Add((LAYER, element));
         }
         public void AddSprite(Vector2 POSITION, Layer LAYER = Layer.FIRST)
@@ -50,7 +56,7 @@ namespace CrimsonEngine.Graphics.GUI
         public void AddLabel(Vector2 POSITION, string LABEL, Color? FONT_COLOR = null, Layer LAYER = Layer.FIRST)
         {
             Label2D element = new Label2D(LABEL, POSITION, FONT_COLOR);
-            Texts.Add((LAYER, element));
+            Labels.Add((LAYER, element));
         }
 
         private void SortElements()
@@ -60,9 +66,14 @@ namespace CrimsonEngine.Graphics.GUI
 
         }
 
+        private void RenderToSomethingBlob()
+        {
+
+        }
+
         public void Update()
         {
-            foreach (var e in Texts) { e.Element.Update(); }
+            foreach (var e in Labels) { e.Element.Update(); }
             foreach (var e in Sprites) { e.Element.Update(); }
             foreach (var e in Buttons) { e.Element.Update(); }
         }
@@ -76,7 +87,7 @@ namespace CrimsonEngine.Graphics.GUI
             };
 
             var b = Buttons.OrderBy(o => o.LayerName);
-            var c = Texts.OrderBy(o => o.LayerName);
+            var c = Labels.OrderBy(o => o.LayerName);
             var a = Sprites.OrderBy(o => o.LayerName);
 
             foreach (var layerName in temp)

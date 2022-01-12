@@ -22,7 +22,7 @@ namespace CrimsonEngine.Graphics.GUI
 
     public class Button2D : Basic2D, IClickable
     {
-        public string Label { get; set; }
+        public Label2D Label { get; set; }
         public LabelAligment TextAlignment { get; set; }
         public List<Polygon> ActiveRegions;
         public bool DrawActiveRegions { get; set; }
@@ -31,7 +31,7 @@ namespace CrimsonEngine.Graphics.GUI
         public Button2D(string LABEL, string TEXTURE, Vector2 POSITION, Vector2 DIMS, LabelAligment TEXT_ALIGNMENT = LabelAligment.VERTICAL_CENTER | LabelAligment.HORIZONTAL_CENTER)
             : base(TEXTURE, POSITION, DIMS)
         {
-            Label = LABEL;
+            Label = new Label2D(LABEL, POSITION, Color.Black);
             ActiveRegions = new List<Polygon>();
             TextAlignment = TEXT_ALIGNMENT;
         }
@@ -39,7 +39,7 @@ namespace CrimsonEngine.Graphics.GUI
         public Button2D() : base("", Vector2.Zero, Vector2.One)
         {
             TextAlignment = LabelAligment.VERTICAL_CENTER | LabelAligment.HORIZONTAL_CENTER;
-            Label = "Lorem ipsum";
+            Label = new Label2D("Lorem ipsum", Position, Color.White);
             
             ActiveRegions = new List<Polygon>();
             ActiveRegions.Add(new Polygon());
