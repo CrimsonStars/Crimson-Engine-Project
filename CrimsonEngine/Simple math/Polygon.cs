@@ -13,10 +13,10 @@ namespace CrimsonEngine.Simple_math
     {
         [XmlIgnore] public List<Point2D> _vertices;
         [XmlIgnore] public List<Polygon> _holes;
-        [XmlIgnore] public float MaxX { get; set; } = 1000;
-        [XmlIgnore] public float MaxY { get; set; } = 1000;
-        [XmlIgnore] public float MinX { get; set; } = -1000;
-        [XmlIgnore] public float MinY { get; set; } = -1000;
+        [XmlIgnore] public float MaxX { get; set; } = -1000;
+        [XmlIgnore] public float MaxY { get; set; } = -1000;
+        [XmlIgnore] public float MinX { get; set; } = 1000;
+        [XmlIgnore] public float MinY { get; set; } = 1000;
 
         [XmlElement("ACTIVE_AREA_POLYGON")]
         public string TextValue { get { return this.ToString(); } set { } }

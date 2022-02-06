@@ -1,14 +1,7 @@
-﻿using CrimsonEngine;
-using CrimsonEngine.Graphics;
+﻿using CrimsonEngine.Globals;
 using CrimsonEngine.Simple_math;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Extended;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CrimsonEngine.Graphics.GUI
 {
@@ -23,11 +16,11 @@ namespace CrimsonEngine.Graphics.GUI
 
         public Label2D(string LABEL, Vector2 POSITION, Color ? FONT_COLOR)
         {
-            Font = LibGlobals.LibContentManager.Load<SpriteFont>("Gamepixies");
+            Font = LibGlobals.LibContentManager.Load<SpriteFont>(LibDebugGlobals.GetRandomFontName());
             LabelText = LABEL;
             Position = POSITION;
             FontColor = ((Color)(FONT_COLOR == null ? Color.White : FONT_COLOR));
-
+            
             if (DrawBorders)
             {
                 BorderPolygon = GetBoundingPolygon();

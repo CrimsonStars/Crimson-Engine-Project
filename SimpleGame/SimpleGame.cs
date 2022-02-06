@@ -4,13 +4,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Input;
 using SimpleGame.Game_objects.GUI;
-using System.Collections.Generic;
-using System.Linq;
-using MonoGame.ImGui;
-using ImGuiNET;
-using MonoGame.Extended;
-using MonoGame.Extended.Gui;
-using MonoGame.Extended.Gui.Controls;
 using CrimsonEngine.Graphics.GUI;
 
 namespace CrimsonEngine.GL
@@ -21,18 +14,18 @@ namespace CrimsonEngine.GL
         private SpriteBatch _spriteBatch;
         private World GameWorld;
         private int TotalFrameCount;
-        private ImGuiDebug DebugGui;
+        //private ImGuiDebug DebugGui;
 
-        private GuiContainer2D guiCont=new GuiContainer2D();
+        private GuiContainer2D guiCont;
 
-
-        SpriteFont sf;
-        TajmerTemp tt;
-        KeyboardState previousKS, newKS;
-        MouseStateExtended LastMS, CurrentMS;
-        KeyboardStateExtended newKSE, oldKSE;
+        #region TEMP VARIABLES OR NOT
+        private SpriteFont sf;
+        private TajmerTemp tt;
+        private KeyboardState previousKS, newKS;
+        private MouseStateExtended LastMS, CurrentMS;
+        private KeyboardStateExtended newKSE, oldKSE;
         private bool WasMouseClicked = false;
-
+        #endregion
 
         void updateKeyboardAndMouseState()
         {
@@ -77,6 +70,7 @@ namespace CrimsonEngine.GL
             IsMouseVisible = true;
 
 
+
             LibGlobals.LibGraphicsDeviceManager = _graphics;
 
             //tt = new TajmerTemp(.350f);
@@ -89,13 +83,12 @@ namespace CrimsonEngine.GL
             //tt.Start();
 
             TotalFrameCount = 0;
-            
         }
 
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            DebugGui = new ImGuiDebug(this);
+            //DebugGui = new ImGuiDebug(this);
 
             base.Initialize();
         }
@@ -114,8 +107,7 @@ namespace CrimsonEngine.GL
             GameWorld = new World();
             GameWorld.GenerateWorld();
 
-            guiCont.AddLabel(Vector2.Zero, "Nope");
-            guiCont.AddLabel(new Vector2(10,80), "Siemka, co tam?",Color.Red, GuiContainer2D.Layer.SECOND);
+            guiCont = new GuiContainer2D();
         }
 
         protected override void Update(GameTime gameTime)
@@ -139,6 +131,7 @@ namespace CrimsonEngine.GL
             
 
             updateKeyboardAndMouseState();
+            LibGlobals.UpdateMousePosition(CurrentMS.Position.ToVector2(), WasMouseClicked);
             #endregion
 
             base.Update(gameTime);
@@ -148,8 +141,10 @@ namespace CrimsonEngine.GL
         {
             //Console.Write(String.Format("{0}\r", tt.GetCurrentState()));
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
-            //_spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
+
+            //_spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
+            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
+            //_spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.AnisotropicClamp);
 
             GameWorld.Draw();
             guiCont.Draw();
@@ -163,7 +158,7 @@ namespace CrimsonEngine.GL
                 TotalFrameCount = 0;
             }
 
-            DebugGui.Draw(gameTime);
+            //DebugGui.Draw(gameTime);
 
             guiCont.Draw();
 

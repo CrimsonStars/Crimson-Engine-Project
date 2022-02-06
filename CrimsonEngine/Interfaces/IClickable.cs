@@ -9,7 +9,7 @@ namespace CrimsonEngine.Graphics.GUI
 {
     interface IClickable
     {
-        bool Hovered(Vector2 MOUSE_POSITION);
-        void Clicked(Vector2 MOUSE_POSITION);
+        bool Hovered();
+        bool IsClicked();
     }
 }
