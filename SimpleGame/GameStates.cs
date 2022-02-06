@@ -4,10 +4,12 @@ using System.Text;
 
 namespace CrimsonEngine.SimpleGame
 {
+    // TODO! Might wanna try the custom enum class
     enum GameStates
     {
-        MAIN_MENU,
-        GAME,
-        EXIT = -1
+        EXIT = 0,
+        MAIN_MENU = 2,
+        GAME = 4,
+        PAUSE = 8
     }
 }
