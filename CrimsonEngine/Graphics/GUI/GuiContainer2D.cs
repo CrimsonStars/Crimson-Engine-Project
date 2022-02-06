@@ -39,7 +39,11 @@ namespace CrimsonEngine.Graphics.GUI
             Labels = new List<(Layer LayerName, Label2D Element)>();
             Sprites = new List<(Layer LayerName, Basic2D Element)>();
 
-            CreateDefaultGui();
+            // For now we don't want to generate default GUI for debugging
+            if (false)
+            {
+                CreateDefaultGui();
+            }
         }
         #endregion
 
