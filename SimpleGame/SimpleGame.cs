@@ -3,8 +3,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Input;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
+using SimpleGame.Game_objects.GUI;
+using CrimsonEngine.Graphics.GUI;
 
 namespace CrimsonEngine.GL
 {
@@ -14,14 +14,10 @@ namespace CrimsonEngine.GL
         private SpriteBatch _spriteBatch;
         private World GameWorld;
         private int TotalFrameCount;
+        //private ImGuiDebug DebugGui;
 
+        private GuiContainer2D guiCont;
 
-        #region Console variables and stuff
-        private const string CommandCursor = "> ";
-        private List<string> CommandHistory = new List<string>(5);
-        private string actualInputStringCommand = "";
-        private Texture2D consoleBackground;
-        #endregion
 
         SpriteFont sf;
         KeyboardState previousKS, newKS;
@@ -30,25 +26,18 @@ namespace CrimsonEngine.GL
 
         KeyboardStateExtended newKSE, oldKSE;
 
-        
-
-
-        private void InterpreteCommand(string INPUT)
-        {
-            Regex rx = new Regex(@"\w+",
-          RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            MatchCollection matches = rx.Matches(INPUT);
-        }
 
 
         void updateKeyboardAndMouseState()
         {
             previousKS = newKS;
             newKS = Keyboard.GetState();
-
             oldKSE = newKSE;
             newKSE = KeyboardExtended.GetState();
 
+            //WasMouseClicked = 
+            //    CurrentMS.IsButtonDown(MouseButton.Left) && !LastMS.IsButtonDown(MouseButton.Left);
+            
             LastMS = CurrentMS;
             CurrentMS = MonoGame.Extended.Input.MouseExtended.GetState();
         }
@@ -75,13 +64,15 @@ namespace CrimsonEngine.GL
         public SimpleGame()
         {
             _graphics = new GraphicsDeviceManager(this);
+            _graphics.PreferredBackBufferWidth = Properties.Instance.Width;
+            _graphics.PreferredBackBufferHeight = Properties.Instance.Height;
+            _graphics.ApplyChanges();
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
-            LibGlobals.SetParameters(_spriteBatch, _graphics, Content, 60);
 
-            GameWorld = new World();
 
+            LibGlobals.LibGraphicsDeviceManager = _graphics;
 
             //tt = new TajmerTemp(.350f);
 
@@ -95,23 +86,10 @@ namespace CrimsonEngine.GL
             TotalFrameCount = 0;
         }
 
-
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
-            // setup WxH of window
-            _graphics.PreferredBackBufferWidth = Properties.Instance.Width;
-            _graphics.PreferredBackBufferHeight = Properties.Instance.Height;
-            _graphics.ApplyChanges();
-
-            Mouse.SetCursor(
-                MouseCursor.FromTexture2D(Content.Load<Texture2D>(@"sprites\amiga_mouse_cursor"),
-                0, 0)
-                );
-
-
-            
+            //DebugGui = new ImGuiDebug(this);
 
             base.Initialize();
         }
@@ -119,37 +97,42 @@ namespace CrimsonEngine.GL
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            LibGlobals.LibSpriteBatch = _spriteBatch;
+            LibGlobals.LibContentManager = Content;
 
+            Mouse.SetCursor(
+                MouseCursor.FromTexture2D(Content.Load<Texture2D>(@"sprites\amiga_mouse_cursor"),
+                0, 0)
+                );
 
-            // TODO: use this.Content to load your game content here
+            GameWorld = new World();
             GameWorld.GenerateWorld();
+
+            guiCont = new GuiContainer2D();
         }
 
         protected override void Update(GameTime gameTime)
         {
             var PressedKeys = newKS.GetPressedKeys();
 
-            updateKeyboardAndMouseState();
             GameWorld.Update();
+            guiCont.Update();
 
-
-
-
+            #region Manage inputs (keyboard or mouse)
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || newKS.IsKeyDown(Keys.Escape)
                 || GameWorld.GAME_STATE == GameStates.EXIT)
             {
                 Exit();
-            } else if (newKS.IsKeyDown(Keys.OemTilde))
-            {
-                InterpreteCommand( System.Console.ReadLine());
             } else
             {
                 GameWorld.Update();
             }
+            
+
+            updateKeyboardAndMouseState();
+            #endregion
 
             base.Update(gameTime);
-
-            
         }
 
         protected override void Draw(GameTime gameTime)
@@ -157,14 +140,12 @@ namespace CrimsonEngine.GL
             //Console.Write(String.Format("{0}\r", tt.GetCurrentState()));
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            //_spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
+            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
+            //_spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.AnisotropicClamp);
+
             GameWorld.Draw();
-
-            // TODO: Add your drawing code here
-
-            //_spriteBatch.Begin();
-            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
-            //_spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
-
+            guiCont.Draw();
 
             TotalFrameCount++;
             if (TotalFrameCount % 30 == 0)
@@ -175,10 +156,14 @@ namespace CrimsonEngine.GL
                 TotalFrameCount = 0;
             }
 
-            GameWorld.Draw();
+
+            guiCont.Draw();
 
             base.Draw(gameTime);
             _spriteBatch.End();
+
+            
+            //SimpleMlemGui.Draw(gameTime, _spriteBatch);
             //Console.Write($"Elapsed time:\t{gameTime.ElapsedGameTime}\r");
         }
     }

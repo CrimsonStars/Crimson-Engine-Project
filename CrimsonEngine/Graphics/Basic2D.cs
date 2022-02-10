@@ -1,5 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+﻿using CrimsonEngine.Simple_math;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 using System;
 
 namespace CrimsonEngine.Graphics
@@ -7,12 +9,13 @@ namespace CrimsonEngine.Graphics
     /// <summary>
     /// Basic static sprite in 2D with no movement or animation.
     /// </summary>
-    class Basic2D : IBasicUpdate, IBasicDraw
+    public class Basic2D : IBasicUpdate, IBasicDraw
     {
         public Texture2D Texture { get; set; }
         public float Transparency { get; set; }
         public Vector2 Position { get; set; }
         public Vector2 Dimensions { get; set; }
+        public bool DrawBoundingBox { get; set; } = true;
 
         public Basic2D(string TEXTURE_PATH, Vector2 POSITION, Vector2 DIMS)
         {
@@ -23,11 +26,31 @@ namespace CrimsonEngine.Graphics
             try
             {
                 Texture = LibGlobals.LibContentManager.Load<Texture2D>(TEXTURE_PATH);
+
+                if (DIMS == Vector2.Zero && Texture != null)
+                {
+                    Dimensions = new Vector2(Texture.Width, Texture.Height);
+                }
             }
             catch (Exception e)
             {
-                Console.WriteLine(String.Format("ERROR FOR: '{0}'\n{1}", TEXTURE_PATH, e.ToString()));
+                Console.WriteLine(
+                    String.Format("ERROR FOR: '{0}'\n{1}", TEXTURE_PATH, e.ToString())
+                    );
             }
+        }
+
+        private Polygon GetBoundingPolygon()
+        {
+            Polygon res = new Polygon();
+
+            var Dims = Vector2.Multiply(Dimensions, 0.5f);
+            res.AddPoint(Position.X - Dims.X, Position.Y - Dims.Y);
+            res.AddPoint(Position.X + Dims.X, Position.Y - Dims.Y);
+            res.AddPoint(Position.X + Dims.X, Position.Y + Dims.Y);
+            res.AddPoint(Position.X - Dims.X, Position.Y + Dims.Y);
+
+            return res;
         }
 
         public virtual void Update()
@@ -61,6 +84,11 @@ namespace CrimsonEngine.Graphics
                         ),
                     new SpriteEffects(),
                     0);
+
+                if(DrawBoundingBox)
+                {
+                    GetBoundingPolygon().Draw();
+                }
             }
         }
     }
