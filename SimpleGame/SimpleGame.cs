@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Input;
 using SimpleGame.Game_objects.GUI;
 using CrimsonEngine.Graphics.GUI;
+using CrimsonEngine.Globals.Inputs;
 
 namespace CrimsonEngine.GL
 {
@@ -17,15 +18,16 @@ namespace CrimsonEngine.GL
         //private ImGuiDebug DebugGui;
 
         private GuiContainer2D guiCont;
-
-
-        SpriteFont sf;
         KeyboardState previousKS, newKS;
-        TajmerTemp tt;
         MouseStateExtended LastMS, CurrentMS;
-
         KeyboardStateExtended newKSE, oldKSE;
 
+        //TajmerTemp tt;
+
+        #region Testing grounds... yup.
+        MouseInput MouseInstance;
+        KeyboardInput KeyboardInstance;
+        #endregion
 
 
         void updateKeyboardAndMouseState()
@@ -91,6 +93,11 @@ namespace CrimsonEngine.GL
             // TODO: Add your initialization logic here
             //DebugGui = new ImGuiDebug(this);
 
+            System.Console.Title = "CRIMSON ENGINE (ver 0.0.1) - DEBUG COSOLE (OUTPUT ONLY)";
+
+            MouseInstance = new MouseInput();
+            KeyboardInstance = new KeyboardInput();
+
             base.Initialize();
         }
 
@@ -113,13 +120,19 @@ namespace CrimsonEngine.GL
 
         protected override void Update(GameTime gameTime)
         {
-            var PressedKeys = newKS.GetPressedKeys();
+            //var PressedKeys = newKS.GetPressedKeys();
+
+            #region Mouse & keyboard update - might need to change
+            MouseInstance.Update();
+            KeyboardInstance.Update();
+            #endregion
 
             GameWorld.Update();
             guiCont.Update();
 
             #region Manage inputs (keyboard or mouse)
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || newKS.IsKeyDown(Keys.Escape)
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || 
+                (newKS.IsKeyDown(Keys.Escape) && newKS.IsKeyDown(Keys.Space))
                 || GameWorld.GAME_STATE == GameStates.EXIT)
             {
                 Exit();
