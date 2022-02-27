@@ -9,29 +9,81 @@ namespace CrimsonEngine.Globals.Inputs
     public class MouseInput : IBasicUpdate
     {
         #region Fields
-        private MouseStateExtended previousMouseState { get; set; }
-        private MouseStateExtended currentMouseState { get; set; }
-        private Point2D PreviousPosition { get; set; }
-        private Point2D CurrentPosition { get; set; }
+        private MouseStateExtended PreviousMouseState { get; set; }
+        private MouseStateExtended CurrentMouseState { get; set; }
+        private List<MouseButton> MouseButtonsList { get; set; }
+
+        // might be use in the future
+        private Dictionary<MouseButton, bool> PreviousButtonPressed;
+        private Dictionary<MouseButton,bool> CurrentButtonPressed;
         #endregion
 
         public MouseInput()
         {
-            previousMouseState = MouseExtended.GetState();
-            currentMouseState = MouseExtended.GetState();
+            MouseButtonsList = new List<MouseButton>() 
+            {
+                MouseButton.Left,
+                MouseButton.Middle,
+                MouseButton.Right
+            };
 
-            PreviousPosition = new Point2D();
-            CurrentPosition = new Point2D();
+#if DEBUG
+            Console.WriteLine("LOG: Mouse buttons for checking added, count = {0}.", MouseButtonsList.Count);
+#endif
+
+            PreviousButtonPressed = new Dictionary<MouseButton, bool>();
+            CurrentButtonPressed = new Dictionary<MouseButton, bool>();
+
+            // add required buttons for checks
+            foreach(var item in MouseButtonsList)
+            {
+                PreviousButtonPressed.Add(item, false);
+                CurrentButtonPressed.Add(item, false);
+            }
+
+#if DEBUG
+            Console.WriteLine("LOG: Mouse buttons pressed list was generated.");
+            Console.WriteLine();
+#endif
+
+            PreviousMouseState = MouseExtended.GetState();
+            CurrentMouseState = MouseExtended.GetState();
         }
 
         public void Update()
         {
-            previousMouseState = currentMouseState;
-            PreviousPosition = (Point2D)previousMouseState.Position;
+            PreviousMouseState = CurrentMouseState;
+            CurrentMouseState = MouseExtended.GetState();
+        }
 
-            currentMouseState = MouseExtended.GetState();
-            CurrentPosition = (Point2D)currentMouseState.Position;
+        public bool IsButtonPressed(MouseButton BUTTON)
+        {
+            return CurrentMouseState.IsButtonDown(BUTTON);
+        }
 
+        public bool WasButtonPressed(MouseButton BUTTON)
+        {
+            return CurrentMouseState.IsButtonDown(BUTTON) && PreviousMouseState.IsButtonUp(BUTTON);
+        }
+
+        public Point2D GetCurrentMousePosition()
+        {
+            return CurrentMouseState.Position;
+        }
+
+        public Point2D GetCurrentMousePositionDelta()
+        {
+            return CurrentMouseState.DeltaPosition;
+        }
+
+        public bool IsMouseMoving(int TOLERANCE = 2)
+        {
+            return CurrentMouseState.DeltaX > TOLERANCE || CurrentMouseState.DeltaY > TOLERANCE;
+        }
+
+        public int MouseWheelDirectionUsed()
+        {
+            return CurrentMouseState.ScrollWheelValue;
         }
     }
 }

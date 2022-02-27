@@ -95,6 +95,24 @@
     <EmbeddedResource Include="Icon.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\sprites\PALLETTES\crimson.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sprites\bullet.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sprites\buttons_sheet.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sprites\crate.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sprites\test_bitmap_font.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sprites\test_bitmap_font_transparent.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="MonoGame.ImGui\obj\Debug\MonoGame.ImGui.csproj.FileListAbsolute.txt" />
     <Content Include="MonoGame.ImGui\obj\Debug\MonoGame.ImGui.dll" />
     <Content Include="MonoGame.ImGui\obj\Debug\MonoGame.ImGui.pdb" />
@@ -172,7 +190,9 @@
     <Content Include="MonoGame.ImGui\packages\System.Runtime.CompilerServices.Unsafe.4.6.0\THIRD-PARTY-NOTICES.TXT" />
     <Content Include="MonoGame.ImGui\packages\System.Runtime.CompilerServices.Unsafe.4.6.0\useSharedDesignerContext.txt" />
     <Content Include="MonoGame.ImGui\packages\System.Runtime.CompilerServices.Unsafe.4.6.0\version.txt" />
-    <MonoGameContentReference Include="Content\Content.mgcb" />
+    <MonoGameContentReference Include="Content\Content.mgcb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </MonoGameContentReference>
     <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\SDL2.dll">
       <Link>x86\SDL2.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -2,34 +2,32 @@
 using System.Collections.Generic;
 using System.Text;
 using MonoGame.Extended.Input;
+using MonoGame.Extended.Input.InputListeners;
+using Microsoft.Xna.Framework.Input;
 
 namespace CrimsonEngine.Globals.Inputs
 {
-    // make it into singleton
-    // make it global or something
-    public class Inputs : IBasicUpdate
+    public sealed class Inputs : IBasicUpdate
     {
         #region Fields
-        private readonly KeyboardInput Keyboard;
-        private readonly MouseInput Mouse;
-        // public GamepadInput Gamepad; -- comming soon
-
-        // check Apos.Input library
-
-
-        private Inputs Instance = null;
-
-        public Inputs GetInstance()
-        {
-            if(Instance == null)
-            {
-                Instance = new Inputs();
-            }
-
-            return Instance;
-        }
-
+        private static KeyboardInput Keyboard { get; set; }
+        private static MouseInput Mouse { get; set; }
+        private static Inputs Instance = null;
+        private static readonly object padlock = new object();
         #endregion
+
+        public static Inputs GetInstance()
+        {
+            lock (padlock)
+            {
+                if (Instance == null)
+                {
+                    Instance = new Inputs();
+                }
+
+                return Instance;
+            }
+        }
 
         private Inputs()
         {
@@ -37,32 +35,32 @@ namespace CrimsonEngine.Globals.Inputs
             Mouse = new MouseInput();
         }
 
+        #region Public methods
         public void Update()
         {
             Mouse.Update();
             Keyboard.Update();
         }
 
-        #region Testing methods
-        public bool IsKeyPressedDown(Microsoft.Xna.Framework.Input.Keys Key)
+        public bool IsKeyboardKeyPressed(Keys KEY)
         {
-            bool result = Keyboard.IsKeyPressed(Key);
-
-            return result;
+            return Keyboard.IsKeyHeldDown(KEY);
+        }
+        
+        public bool IsMouseButtonPressed(MouseButton BUTTON)
+        {
+            return Mouse.IsButtonPressed(BUTTON);
         }
 
-        public bool WasKeySinglePressed(Microsoft.Xna.Framework.Input.Keys Key)
+        public bool WasKeyboardKeyPressed(Keys KEY)
         {
-            bool result = Keyboard.WasKeyPressed(Key);
-
-            return result;
+            return Keyboard.WasButtonSinglePressed(KEY);
         }
 
-        public void ListPressedKeys()
+        public bool WasMouseButtonPressed(MouseButton BUTTON)
         {
-
+            return Mouse.WasButtonPressed(BUTTON);
         }
-
         #endregion
     }
 }

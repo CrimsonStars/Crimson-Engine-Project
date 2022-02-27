@@ -6,6 +6,7 @@ using MonoGame.Extended.Input;
 using SimpleGame.Game_objects.GUI;
 using CrimsonEngine.Graphics.GUI;
 using CrimsonEngine.Globals.Inputs;
+using System;
 
 namespace CrimsonEngine.GL
 {
@@ -93,10 +94,7 @@ namespace CrimsonEngine.GL
             // TODO: Add your initialization logic here
             //DebugGui = new ImGuiDebug(this);
 
-            System.Console.Title = "CRIMSON ENGINE (ver 0.0.1) - DEBUG COSOLE (OUTPUT ONLY)";
-
-            MouseInstance = new MouseInput();
-            KeyboardInstance = new KeyboardInput();
+            Console.Title = "CRIMSON ENGINE (ver 0.0.1) - DEBUG COSOLE (OUTPUT ONLY)";
 
             base.Initialize();
         }
@@ -113,39 +111,48 @@ namespace CrimsonEngine.GL
                 );
 
             GameWorld = new World();
-            GameWorld.GenerateWorld();
-
             guiCont = new GuiContainer2D();
+
+            GameWorld.GenerateWorld();
         }
 
         protected override void Update(GameTime gameTime)
         {
-            //var PressedKeys = newKS.GetPressedKeys();
-
-            #region Mouse & keyboard update - might need to change
-            MouseInstance.Update();
-            KeyboardInstance.Update();
-            #endregion
-
             GameWorld.Update();
             guiCont.Update();
 
             #region Manage inputs (keyboard or mouse)
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || 
-                (newKS.IsKeyDown(Keys.Escape) && newKS.IsKeyDown(Keys.Space))
-                || GameWorld.GAME_STATE == GameStates.EXIT)
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
+                || GameWorld.GAME_STATE == GameStates.EXIT
+                )
             {
                 Exit();
-            } else
+            }
+            #region Example usage of inputs (keyboard & mouse)
+            
+            if (Inputs.GetInstance().WasKeyboardKeyPressed(Keys.W))
             {
-                GameWorld.Update();
+                Console.WriteLine("W");
             }
             
+            if (Inputs.GetInstance().IsKeyboardKeyPressed(Keys.Up))
+            {
+                Console.WriteLine("Up");
+            }
 
-            updateKeyboardAndMouseState();
+            if (Inputs.GetInstance().WasMouseButtonPressed(MouseButton.Left))
+            {
+                Console.WriteLine("LEFT MOUSE BUTTON");
+            }
             #endregion
 
+            #endregion
+
+            #region Updates
+            GameWorld.Update();
+            Inputs.GetInstance().Update();
             base.Update(gameTime);
+            #endregion
         }
 
         protected override void Draw(GameTime gameTime)
@@ -160,6 +167,7 @@ namespace CrimsonEngine.GL
             GameWorld.Draw();
             guiCont.Draw();
 
+#if DEBUG
             TotalFrameCount++;
             if (TotalFrameCount % 30 == 0)
             {
@@ -168,13 +176,11 @@ namespace CrimsonEngine.GL
                 Window.Title = $"Crimson game - {instance.Version} ({framesPerSecond} fps)";
                 TotalFrameCount = 0;
             }
-
+#endif
 
             guiCont.Draw();
-
             base.Draw(gameTime);
             _spriteBatch.End();
-
             
             //SimpleMlemGui.Draw(gameTime, _spriteBatch);
             //Console.Write($"Elapsed time:\t{gameTime.ElapsedGameTime}\r");
