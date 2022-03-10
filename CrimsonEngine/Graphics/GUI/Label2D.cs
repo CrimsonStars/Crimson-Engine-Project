@@ -16,7 +16,7 @@ namespace CrimsonEngine.Graphics.GUI
 
         public Label2D(string LABEL, Vector2 POSITION, Color ? FONT_COLOR)
         {
-            Font = LibGlobals.LibContentManager.Load<SpriteFont>(LibDebugGlobals.GetRandomFontName());
+            Font = LibGlobals.LibContentManager.Load<SpriteFont>("fonts/PixeloidMono_regular_12");
             LabelText = LABEL;
             Position = POSITION;
             FontColor = ((Color)(FONT_COLOR == null ? Color.White : FONT_COLOR));
