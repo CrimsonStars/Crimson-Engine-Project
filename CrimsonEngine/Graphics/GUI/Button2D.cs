@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CrimsonEngine.Globals;
 
 namespace CrimsonEngine.Graphics.GUI
 {

@@ -1,9 +1,9 @@
 
 #----------------------------- Global Properties ----------------------------#
 
-/outputDir:bin/$(Platform)
-/intermediateDir:obj/$(Platform)
-/platform:DesktopGL
+/outputDir:bin
+/intermediateDir:obj
+/platform:Windows
 /config:
 /profile:Reach
 /compress:False
@@ -13,6 +13,18 @@
 /reference:..\bin\DesktopGL\AnyCPU\Debug\MonoGame.Extended.Content.Pipeline.dll
 
 #---------------------------------- Content ---------------------------------#
+
+#begin consolas_18px_0.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:consolas_18px_0.png
 
 #begin fonts/Pixeloid_license.txt
 /copy:fonts/Pixeloid_license.txt
@@ -48,23 +60,6 @@
 /processorParam:TextureFormat=Compressed
 /build:fonts/PixeloidMono_regular_8.spritefont
 
-#begin Gamepixies.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:Gamepixies.spritefont
-
-#begin Gamepixies-8MO6n.ttf
-/copy:Gamepixies-8MO6n.ttf
-
-#begin LittleMissLoudonBold.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:LittleMissLoudonBold.spritefont
-
 #begin pixel.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -76,16 +71,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:pixel.png
-
-#begin PressStart2P.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:PressStart2P.spritefont
-
-#begin PressStart2P-vaV7.ttf
-/copy:PressStart2P-vaV7.ttf
 
 #begin sprites/amiga_mouse_cursor.png
 /importer:TextureImporter

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using CrimsonEngine.Globals;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -6,13 +7,15 @@ using System.Text;
 
 namespace CrimsonEngine.Misc
 {
-    class BasicFont : IBasicDraw, IBasicUpdate
+    public class BasicFont : IBasicDraw
     {
         #region Properties
         public SpriteFont Font{ get; set; }
         public Vector2 Position { get; set; }
         public int FontSize { get; set; }
         public Color FontColor { get; set; }
+        public string TextToDisplay { get; set; }
+        private string FontName { get; set; } // just to have that information for debugging
         #endregion
 
         #region Constructors
@@ -24,15 +27,12 @@ namespace CrimsonEngine.Misc
             FontColor = Color.Black;
         }
 
-        public BasicFont(string FONTNAME, Vector2 POSITION, int FONTSIZE, Color ? FONTCOLOR)
+        public BasicFont(string FONTNAME, Vector2 POSITION, Color ? FONTCOLOR,int FONTSIZE=8)
         {
             Position = POSITION;
-            FontSize = FontSize;
-            
-            if (FONTCOLOR != null)
-            {
-                FontColor = (Color)FONTCOLOR;
-            }
+            FontSize = FONTSIZE;
+            FontColor = (Color)(FONTCOLOR == null ? Color.White : FONTCOLOR);
+            FontName = FONTNAME;
 
             LoadSpriteFont(FONTNAME);
         }
@@ -45,31 +45,28 @@ namespace CrimsonEngine.Misc
                 throw new ArgumentNullException("fontName");
             }
 
-            this.Font = LibGlobals.LibContentManager.Load<SpriteFont>("fonts/" + fontName);
+            Font = LibGlobals.LibContentManager.Load<SpriteFont>("fonts/" + fontName);
 
         }
 
-
         public void Draw()
         {
-            throw new NotImplementedException();
+            Draw(Vector2.Zero);
         }
 
         public void Draw(Vector2 OFFSET)
         {
-            throw new NotImplementedException();
+            if (Font == null)
+            {
+                throw new ArgumentNullException("Font");
+            }
+         
+            if (string.IsNullOrEmpty(TextToDisplay))
+            {
+                throw new NullReferenceException("TextToDisplay");
+            }
+
+            LibGlobals.LibSpriteBatch.DrawString(Font, TextToDisplay, Position, FontColor);
         }
-
-        public void Update()
-        {
-            throw new NotImplementedException();
-        }
-
-        #region Public methods
-        #endregion
-
-        #region Private methods
-        #endregion
-        
     }
 }

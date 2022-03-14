@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CrimsonEngine
+namespace CrimsonEngine.Globals
 {
     public static class LibGlobals
     {
