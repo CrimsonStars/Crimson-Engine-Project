@@ -19,9 +19,6 @@ namespace CrimsonEngine.GL
         //private ImGuiDebug DebugGui;
 
         private GuiContainer2D guiCont;
-        KeyboardState previousKS, newKS;
-        MouseStateExtended LastMS, CurrentMS;
-        KeyboardStateExtended newKSE, oldKSE;
 
         //TajmerTemp tt;
 
@@ -29,40 +26,6 @@ namespace CrimsonEngine.GL
         MouseInput MouseInstance;
         KeyboardInput KeyboardInstance;
         #endregion
-
-
-        void updateKeyboardAndMouseState()
-        {
-            previousKS = newKS;
-            newKS = Keyboard.GetState();
-            oldKSE = newKSE;
-            newKSE = KeyboardExtended.GetState();
-
-            //WasMouseClicked = 
-            //    CurrentMS.IsButtonDown(MouseButton.Left) && !LastMS.IsButtonDown(MouseButton.Left);
-            
-            LastMS = CurrentMS;
-            CurrentMS = MonoGame.Extended.Input.MouseExtended.GetState();
-        }
-
-        bool WasPresed(Keys key)
-        {
-            return newKS.IsKeyDown(key) && !previousKS.IsKeyDown(key);
-        }
-
-        bool EqualKeyboardStates(KeyboardState A, KeyboardState B)
-        {
-            if (A.GetPressedKeys().Length == B.GetPressedKeys().Length)
-            {
-                for (int i = 0; i < A.GetPressedKeys().Length; i++)
-                {
-                    if (A.GetPressedKeys()[i] == B.GetPressedKeys()[i])
-                        return false;
-                }
-            }
-
-            return true;
-        }
 
         public SimpleGame()
         {
@@ -72,8 +35,6 @@ namespace CrimsonEngine.GL
             _graphics.ApplyChanges();
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-
-
 
             LibGlobals.LibGraphicsDeviceManager = _graphics;
 
@@ -128,8 +89,8 @@ namespace CrimsonEngine.GL
             {
                 Exit();
             }
+
             #region Example usage of inputs (keyboard & mouse)
-            
             if (Inputs.GetInstance().WasKeyboardKeyPressed(Keys.W))
             {
                 Console.WriteLine("W");
@@ -144,8 +105,12 @@ namespace CrimsonEngine.GL
             {
                 Console.WriteLine("LEFT MOUSE BUTTON");
             }
-            #endregion
 
+            if (Inputs.GetInstance().IsKeyboardKeyPressed(Keys.Escape))
+            {
+                Exit();
+            }
+            #endregion
             #endregion
 
             #region Updates
