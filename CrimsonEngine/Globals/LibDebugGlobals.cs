@@ -7,17 +7,18 @@ namespace CrimsonEngine.Globals
 {
     public static class LibDebugGlobals
     {
-        private static List<string> fontsList;
+        private static List<(string fontname, string path)> fontsList;
         private static bool wasInitialised = false;
         private static int lastRandomisedNumber = -1;
 
         private static void InitializeAllElements()
         {
-            fontsList = new List<string>();
-            fontsList.Add("Gamepixies");
-            fontsList.Add("LittleMissLoudonBold");
-            fontsList.Add("PressStart2P");
-            //fontsList.Add("");
+            fontsList = new List<(string fontname, string path)>();
+
+            fontsList.Add(("Pixeloid - 8", "fonts/Pixeloid_regular_8"));
+            fontsList.Add(("Pixeloid - 10", "fonts/Pixeloid_regular_10"));
+            fontsList.Add(("Pixeloid - 12", "fonts/Pixeloid_regular_12"));
+            fontsList.Add(("Pixeloid - 18", "fonts/Pixeloid_regular_18"));
         }
 
         public static string GetRandomFontName()
@@ -43,7 +44,7 @@ namespace CrimsonEngine.Globals
 
             if(!fontsList.Any()) return result;
 
-            return fontsList.ElementAtOrDefault(randomNumber);
+            return fontsList.ElementAtOrDefault(randomNumber).path;
         }
     }
 }

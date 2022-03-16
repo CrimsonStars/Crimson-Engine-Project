@@ -40,7 +40,7 @@ namespace CrimsonEngine.Graphics.GUI
             Sprites = new List<(Layer LayerName, Basic2D Element)>();
 
             // For now we don't want to generate default GUI for debugging
-            if (false)
+            if (true)
             {
                 CreateDefaultGui();
             }
