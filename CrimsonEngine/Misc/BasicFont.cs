@@ -1,6 +1,8 @@
 ﻿using CrimsonEngine.Globals;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
+using MonoGame.Extended.BitmapFonts;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,12 +12,12 @@ namespace CrimsonEngine.Misc
     public class BasicFont : IBasicDraw
     {
         #region Properties
-        public SpriteFont Font{ get; set; }
+        public BitmapFont Font{ get; set; }
         public Vector2 Position { get; set; }
         public int FontSize { get; set; }
         public Color FontColor { get; set; }
         public string TextToDisplay { get; set; }
-        private string FontName { get; set; } // just to have that information for debugging
+        public bool DrawBoundingBox { get; set; }
         #endregion
 
         #region Constructors
@@ -25,14 +27,19 @@ namespace CrimsonEngine.Misc
             Position = Vector2.Zero;
             FontSize = 0;
             FontColor = Color.Black;
+
         }
 
-        public BasicFont(string FONTNAME, Vector2 POSITION, Color ? FONTCOLOR,int FONTSIZE=8)
+        public BasicFont(string FONTNAME, 
+            Vector2 POSITION, Color ? FONTCOLOR,
+            string LABEL="Lorem ipsum...", 
+            int FONTSIZE = 8)
         {
             Position = POSITION;
             FontSize = FONTSIZE;
             FontColor = (Color)(FONTCOLOR == null ? Color.White : FONTCOLOR);
-            FontName = FONTNAME;
+            DrawBoundingBox = true;
+            TextToDisplay = LABEL;
 
             LoadSpriteFont(FONTNAME);
         }
@@ -45,8 +52,7 @@ namespace CrimsonEngine.Misc
                 throw new ArgumentNullException("fontName");
             }
 
-            Font = LibGlobals.LibContentManager.Load<SpriteFont>("fonts/" + fontName);
-
+            Font = LibGlobals.LibContentManager.Load<BitmapFont>(fontName);
         }
 
         public void Draw()
@@ -67,6 +73,16 @@ namespace CrimsonEngine.Misc
             }
 
             LibGlobals.LibSpriteBatch.DrawString(Font, TextToDisplay, Position, FontColor);
+
+            if (DrawBoundingBox)
+            {
+                LibGlobals.LibSpriteBatch.DrawRectangle(Position,
+                    new Size2(
+                        Font.MeasureString(TextToDisplay).Width,
+                        Font.MeasureString(TextToDisplay).Height
+                        ),
+                    Color.Red);
+            }
         }
     }
 }

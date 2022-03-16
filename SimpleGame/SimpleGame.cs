@@ -7,6 +7,7 @@ using SimpleGame.Game_objects.GUI;
 using CrimsonEngine.Graphics.GUI;
 using CrimsonEngine.Globals;
 using CrimsonEngine.Misc;
+using System.Collections.Generic;
 
 namespace CrimsonEngine.GL
 {
@@ -20,6 +21,8 @@ namespace CrimsonEngine.GL
 
         private GuiContainer2D guiCont;
         TajmerTemp tt;
+
+        private List<BasicFont> LabelsToDraw;
 
 
         public SimpleGame()
@@ -42,6 +45,8 @@ namespace CrimsonEngine.GL
             //TargetElapsedTime = TimeSpan.FromSeconds(1.0 / PropertiesInstance.Framerate);
 
             //tt.Start();
+
+            LabelsToDraw = new List<BasicFont>();
 
             TotalFrameCount = 0;
         }
@@ -69,8 +74,6 @@ namespace CrimsonEngine.GL
             GameWorld.GenerateWorld();
 
             guiCont = new GuiContainer2D();
-
-            BasicFont bf = new BasicFont(null, Vector2.Zero, Color.Red);
         }
 
         protected override void Update(GameTime gameTime)
@@ -83,15 +86,11 @@ namespace CrimsonEngine.GL
                 || GameWorld.GAME_STATE == GameStates.EXIT)
             {
                 Exit();
-            } else
-            {
-                GameWorld.Update();
             }
-            
 
-            #endregion
-
+            GameWorld.Update();
             base.Update(gameTime);
+            #endregion
         }
 
         protected override void Draw(GameTime gameTime)
