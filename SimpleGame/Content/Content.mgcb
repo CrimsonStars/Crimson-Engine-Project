@@ -3,14 +3,14 @@
 
 /outputDir:bin
 /intermediateDir:obj
-/platform:Windows
+/platform:DesktopGL
 /config:
 /profile:Reach
 /compress:False
 
 #-------------------------------- References --------------------------------#
 
-/reference:..\bin\DesktopGL\AnyCPU\Debug\MonoGame.Extended.Content.Pipeline.dll
+/reference:..\..\..\..\..\.nuget\packages\monogame.extended.content.pipeline\3.8.0\tools\MonoGame.Extended.Content.Pipeline.dll
 
 #---------------------------------- Content ---------------------------------#
 
@@ -39,7 +39,7 @@
 #begin fonts/pixeloid_12_0.png
 /importer:TextureImporter
 /processor:TextureProcessor
-/processorParam:ColorKeyColor=0,0,0,255
+/processorParam:ColorKeyColor=255,0,255,255
 /processorParam:ColorKeyEnabled=True
 /processorParam:GenerateMipmaps=False
 /processorParam:PremultiplyAlpha=True
@@ -56,7 +56,7 @@
 #begin fonts/pixeloid_24_0.png
 /importer:TextureImporter
 /processor:TextureProcessor
-/processorParam:ColorKeyColor=0,0,0,255
+/processorParam:ColorKeyColor=255,0,255,255
 /processorParam:ColorKeyEnabled=True
 /processorParam:GenerateMipmaps=False
 /processorParam:PremultiplyAlpha=True
@@ -73,7 +73,7 @@
 #begin fonts/pixeloid_32_0.png
 /importer:TextureImporter
 /processor:TextureProcessor
-/processorParam:ColorKeyColor=0,0,0,255
+/processorParam:ColorKeyColor=255,0,255,255
 /processorParam:ColorKeyEnabled=True
 /processorParam:GenerateMipmaps=False
 /processorParam:PremultiplyAlpha=True
@@ -90,7 +90,7 @@
 #begin fonts/pixeloid_32_bold_0.png
 /importer:TextureImporter
 /processor:TextureProcessor
-/processorParam:ColorKeyColor=0,0,0,255
+/processorParam:ColorKeyColor=255,0,255,255
 /processorParam:ColorKeyEnabled=True
 /processorParam:GenerateMipmaps=False
 /processorParam:PremultiplyAlpha=True
@@ -101,9 +101,6 @@
 
 #begin fonts/Pixeloid_license.txt
 /copy:fonts/Pixeloid_license.txt
-
-#begin fonts/PixeloidMono.ttf
-/copy:fonts/PixeloidMono.ttf
 
 #begin fonts/PixeloidMono_regular_10.spritefont
 /importer:FontDescriptionImporter
@@ -132,18 +129,6 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:fonts/PixeloidMono_regular_8.spritefont
-
-#begin pixel.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:pixel.png
 
 #begin sprites/amiga_mouse_cursor.png
 /importer:TextureImporter

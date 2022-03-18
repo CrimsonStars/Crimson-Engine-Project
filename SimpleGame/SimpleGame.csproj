@@ -84,9 +84,6 @@
     <Compile Include="SimpleGame.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="MonoGame.Framework">
-      <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -95,10 +92,25 @@
     <EmbeddedResource Include="Icon.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bin\DesktopGL\fonts\Pixeloid_license.txt">
+    <None Include="Content\bin\DesktopGL\Content\fonts\Pixeloid_license.txt" />
+    <Content Include="Content\fonts\Consolas_16_px.fnt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\fonts\Consolas_16_px_0.png" />
+    <Content Include="Content\fonts\Consolas_16_px_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\pixeloid_12_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\pixeloid_24_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\pixeloid_32_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\pixeloid_32_bold_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\fonts\Pixeloid_license.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -179,7 +191,6 @@
     <Content Include="MonoGame.ImGui\packages\System.Runtime.CompilerServices.Unsafe.4.6.0\THIRD-PARTY-NOTICES.TXT" />
     <Content Include="MonoGame.ImGui\packages\System.Runtime.CompilerServices.Unsafe.4.6.0\useSharedDesignerContext.txt" />
     <Content Include="MonoGame.ImGui\packages\System.Runtime.CompilerServices.Unsafe.4.6.0\version.txt" />
-    <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\SDL2.dll">
       <Link>x86\SDL2.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -270,72 +281,45 @@
     <Content Include="Content\PressStart2P.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Content\bin\DesktopGL\Content\fonts\Pixeloid_Mono.ttf" />
-    <None Include="Content\bin\DesktopGL\Content\fonts\Pixeloid_Mono_10.xnb" />
-    <None Include="Content\bin\DesktopGL\Content\fonts\Pixeloid_Mono_12.xnb" />
-    <None Include="Content\bin\DesktopGL\Content\fonts\Pixeloid_Mono_24.xnb" />
-    <None Include="Content\bin\DesktopGL\Content\fonts\Pixeloid_Mono_8.xnb" />
-    <None Include="Content\bin\DesktopGL\Content\Gamepixies-8MO6n.ttf" />
-    <None Include="Content\bin\DesktopGL\Content\Gamepixies.xnb" />
-    <None Include="Content\bin\DesktopGL\Content\LittleMissLoudonBold.xnb" />
-    <None Include="Content\bin\DesktopGL\Content\pixel.xnb" />
-    <None Include="Content\bin\DesktopGL\Content\PressStart2P-vaV7.ttf" />
-    <None Include="Content\bin\DesktopGL\Content\PressStart2P.xnb" />
-    <None Include="Content\bin\DesktopGL\Content\qc_background.xnb" />
-    <None Include="Content\bin\DesktopGL\Content\qc_console.xnb" />
-    <None Include="Content\bin\DesktopGL\Content\sprites\amiga_mouse_cursor.xnb" />
-    <Content Include="Content\bin\DesktopGL\fonts\PixeloidMono.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\bin\DesktopGL\fonts\PixeloidMono_regular_10.xnb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\bin\DesktopGL\fonts\PixeloidMono_regular_12.xnb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\bin\DesktopGL\fonts\PixeloidMono_regular_18.xnb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\bin\DesktopGL\fonts\PixeloidMono_regular_8.xnb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\bin\DesktopGL\Gamepixies-8MO6n.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\bin\DesktopGL\Gamepixies.xnb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\bin\DesktopGL\LittleMissLoudonBold.xnb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\bin\DesktopGL\pixel.xnb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\bin\DesktopGL\PressStart2P-vaV7.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\bin\DesktopGL\PressStart2P.xnb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\bin\DesktopGL\sprites\amiga_mouse_cursor.xnb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\fonts\PixeloidMono.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\fonts\PixeloidMono_regular_10.spritefont">
+    <None Include="Content\bin\DesktopGL\Content\fonts\Consolas_16_px_0.xnb" />
+    <None Include="Content\bin\DesktopGL\Content\fonts\PixeloidMono.ttf" />
+    <None Include="Content\bin\DesktopGL\Content\fonts\PixeloidMono_regular_10.xnb" />
+    <None Include="Content\bin\DesktopGL\Content\fonts\PixeloidMono_regular_12.xnb" />
+    <None Include="Content\bin\DesktopGL\Content\fonts\PixeloidMono_regular_18.xnb" />
+    <None Include="Content\bin\DesktopGL\Content\fonts\PixeloidMono_regular_8.xnb" />
+    <Content Include="Content\bin\DesktopGL\Content\fonts\pixeloid_12_0.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\fonts\PixeloidMono_regular_12.spritefont">
+    <Content Include="Content\bin\DesktopGL\Content\fonts\pixeloid_24_0.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\fonts\PixeloidMono_regular_18.spritefont">
+    <Content Include="Content\bin\DesktopGL\Content\fonts\pixeloid_32_0.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\fonts\PixeloidMono_regular_8.spritefont">
+    <Content Include="Content\bin\DesktopGL\Content\fonts\pixeloid_32_bold_0.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\fonts\Consolas_16_px.fnt" />
+    <None Include="Content\bin\DesktopGL\Content\pixel.xnb" />
+    <None Include="Content\bin\DesktopGL\Content\sprites\amiga_mouse_cursor.xnb" />
+    <Content Include="Content\fonts\pixeloid_12.fnt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\pixeloid_24.fnt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\pixeloid_32.fnt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\pixeloid_32_bold.fnt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Content\Content.mgcb" />
+    <Content Include="Content\sprites\amiga_mouse_cursor.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="MonoGame.ImGui\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="MonoGame.ImGui\obj\Debug\MonoGame.ImGui.csproj.CopyComplete" />
     <None Include="MonoGame.ImGui\obj\Debug\MonoGame.ImGui.csproj.CoreCompileInputs.cache" />
@@ -404,6 +388,9 @@
       <Version>1.78.0</Version>
     </PackageReference>
     <PackageReference Include="MonoGame.Extended">
+      <Version>3.8.0</Version>
+    </PackageReference>
+    <PackageReference Include="MonoGame.Extended.Content.Pipeline">
       <Version>3.8.0</Version>
     </PackageReference>
     <PackageReference Include="MonoGame.Extended.Gui">
@@ -552,6 +539,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\DesktopGL\Content\" />
+    <Folder Include="Content\bin\DesktopGL\fonts\" />
+    <Folder Include="Content\bin\DesktopGL\sprites\" />
+    <Folder Include="Content\bin\fonts\" />
+    <Folder Include="Content\bin\sprites\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
