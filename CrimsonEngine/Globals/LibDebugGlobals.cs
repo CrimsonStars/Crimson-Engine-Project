@@ -15,10 +15,10 @@ namespace CrimsonEngine.Globals
         {
             fontsList = new List<(string fontname, string path)>();
 
-            fontsList.Add(("Pixeloid - 8", "fonts/Pixeloid_regular_8"));
-            fontsList.Add(("Pixeloid - 10", "fonts/Pixeloid_regular_10"));
-            fontsList.Add(("Pixeloid - 12", "fonts/Pixeloid_regular_12"));
-            fontsList.Add(("Pixeloid - 18", "fonts/Pixeloid_regular_18"));
+            fontsList.Add(("pixeloid_12", "fonts/pixeloid_12"));
+            fontsList.Add(("pixeloid_24", "fonts/pixeloid_24"));
+            fontsList.Add(("pixeloid_32", "fonts/pixeloid_32"));
+            fontsList.Add(("pixeloid_32_bold", "fonts/pixeloid_32_bold"));
         }
 
         public static string GetRandomFontName()
