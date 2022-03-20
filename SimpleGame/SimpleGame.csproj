@@ -48,6 +48,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ConsoleDropdown.cs" />
+    <Compile Include="DebugTestingMethods.cs" />
     <Compile Include="Game objects\CurrentState.cs" />
     <Compile Include="Game objects\GameAction.cs" />
     <Compile Include="Game objects\GanmeStatus.cs" />
@@ -84,6 +85,9 @@
     <Compile Include="SimpleGame.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -92,28 +96,6 @@
     <EmbeddedResource Include="Icon.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\bin\DesktopGL\Content\fonts\Pixeloid_license.txt" />
-    <Content Include="Content\fonts\Consolas_16_px.fnt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\fonts\Consolas_16_px_0.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\fonts\pixeloid_12_0.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\fonts\pixeloid_24_0.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\fonts\pixeloid_32_0.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\fonts\pixeloid_32_bold_0.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\fonts\Pixeloid_license.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="MonoGame.ImGui\obj\Debug\MonoGame.ImGui.csproj.FileListAbsolute.txt" />
     <Content Include="MonoGame.ImGui\obj\Debug\MonoGame.ImGui.dll" />
     <Content Include="MonoGame.ImGui\obj\Debug\MonoGame.ImGui.pdb" />
@@ -191,6 +173,7 @@
     <Content Include="MonoGame.ImGui\packages\System.Runtime.CompilerServices.Unsafe.4.6.0\THIRD-PARTY-NOTICES.TXT" />
     <Content Include="MonoGame.ImGui\packages\System.Runtime.CompilerServices.Unsafe.4.6.0\useSharedDesignerContext.txt" />
     <Content Include="MonoGame.ImGui\packages\System.Runtime.CompilerServices.Unsafe.4.6.0\version.txt" />
+    <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\SDL2.dll">
       <Link>x86\SDL2.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -237,89 +220,48 @@
     </None>
     <None Include="app.config" />
     <None Include="app.manifest" />
-    <None Include="bin\DesktopGL\AnyCPU\Debug\Content\Gamepixies-8MO6n.ttf" />
-    <None Include="bin\DesktopGL\AnyCPU\Debug\Content\Gamepixies.xnb" />
-    <None Include="bin\DesktopGL\AnyCPU\Debug\Content\LittleMissLoudonBold.xnb" />
-    <None Include="bin\DesktopGL\AnyCPU\Debug\Content\pixel.xnb" />
-    <None Include="bin\DesktopGL\AnyCPU\Debug\Content\PressStart2P-vaV7.ttf" />
-    <None Include="bin\DesktopGL\AnyCPU\Debug\Content\PressStart2P.xnb" />
-    <None Include="bin\DesktopGL\AnyCPU\Debug\Content\qc_background.xnb" />
-    <None Include="bin\DesktopGL\AnyCPU\Debug\Content\qc_console.xnb" />
-    <None Include="bin\DesktopGL\AnyCPU\Debug\Content\sprites\amiga_mouse_cursor.xnb" />
-    <None Include="bin\DesktopGL\AnyCPU\Debug\libopenal.1.dylib" />
-    <None Include="bin\DesktopGL\AnyCPU\Debug\libSDL2-2.0.0.dylib" />
-    <None Include="bin\DesktopGL\AnyCPU\Debug\MonoGame.Framework.dll.config" />
-    <None Include="bin\DesktopGL\AnyCPU\Debug\SimpleGame.exe.config" />
-    <None Include="bin\DesktopGL\AnyCPU\Debug\x64\libopenal.so.1" />
-    <None Include="bin\DesktopGL\AnyCPU\Debug\x64\libSDL2-2.0.so.0" />
-    <None Include="bin\DesktopGL\AnyCPU\Debug\x86\libopenal.so.1" />
-    <None Include="bin\DesktopGL\AnyCPU\Debug\x86\libSDL2-2.0.so.0" />
-    <Content Include="Content\Gamepixies-8MO6n.ttf">
+    <Content Include="Content\bin\DesktopGL\Content\Gamepixies-8MO6n.ttf" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Content\bin\DesktopGL\Content\Gamepixies.xnb" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Content\bin\DesktopGL\Content\LittleMissLoudonBold.xnb" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Content\bin\DesktopGL\Content\pixel.xnb" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Content\bin\DesktopGL\Content\PressStart2P-vaV7.ttf" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Content\bin\DesktopGL\Content\PressStart2P.xnb" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Content\bin\DesktopGL\Content\qc_background.xnb" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Content\bin\DesktopGL\Content\qc_console.xnb" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Content\bin\DesktopGL\Content\sprites\amiga_mouse_cursor.xnb" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Content\bin\DesktopGL\sprites\amiga_mouse_cursor.xnb" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Content\Gamepixies-8MO6n.ttf" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Content\Gamepixies.spritefont" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Content\Gamepixies.xnb" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Content\LittleMissLoudonBold-VGO9l.ttf" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Content\LittleMissLoudonBold.spritefont" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Content\LittleMissLoudonBold.xnb" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Content\PressStart2P-vaV7.ttf" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Content\PressStart2P.spritefont" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Content\PressStart2P.xnb" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Content\gameworld_data\events.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Gamepixies.spritefont">
+    <Content Include="Content\gameworld_data\items.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Gamepixies.xnb">
+    <Content Include="Content\gameworld_data\JSON_Samples\events.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\LittleMissLoudonBold-VGO9l.ttf">
+    <Content Include="Content\gameworld_data\JSON_Samples\items.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\LittleMissLoudonBold.spritefont">
+    <Content Include="Content\gameworld_data\JSON_Samples\Rooms_00.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\LittleMissLoudonBold.xnb">
+    <Content Include="Content\gameworld_data\Simple json gameworld\events.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\PressStart2P-vaV7.ttf">
+    <Content Include="Content\gameworld_data\Simple json gameworld\items_001.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\PressStart2P.spritefont">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\PressStart2P.xnb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\fonts\PixeloidMono.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="Content\bin\DesktopGL\Content\fonts\Consolas_16_px_0.xnb" />
-    <None Include="Content\bin\DesktopGL\Content\fonts\PixeloidMono.ttf" />
-    <None Include="Content\bin\DesktopGL\Content\fonts\PixeloidMono_regular_10.xnb" />
-    <None Include="Content\bin\DesktopGL\Content\fonts\PixeloidMono_regular_12.xnb" />
-    <None Include="Content\bin\DesktopGL\Content\fonts\PixeloidMono_regular_18.xnb" />
-    <None Include="Content\bin\DesktopGL\Content\fonts\PixeloidMono_regular_8.xnb" />
-    <Content Include="Content\bin\DesktopGL\Content\fonts\pixeloid_12_0.xnb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\bin\DesktopGL\Content\fonts\pixeloid_24_0.xnb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\bin\DesktopGL\Content\fonts\pixeloid_32_0.xnb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\bin\DesktopGL\Content\fonts\pixeloid_32_bold_0.xnb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="Content\bin\DesktopGL\Content\pixel.xnb" />
-    <None Include="Content\bin\DesktopGL\Content\sprites\amiga_mouse_cursor.xnb" />
-    <Content Include="Content\fonts\pixeloid_12.fnt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\fonts\pixeloid_24.fnt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\fonts\pixeloid_32.fnt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\fonts\pixeloid_32_bold.fnt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="Content\Content.mgcb" />
-    <Content Include="Content\sprites\amiga_mouse_cursor.xnb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <None Include="Content\gameworld_data\Simple json gameworld\A0_rooms.json" />
+    <None Include="Content\gameworld_data\Simple json gameworld\00_rooms.json" />
     <None Include="MonoGame.ImGui\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="MonoGame.ImGui\obj\Debug\MonoGame.ImGui.csproj.CopyComplete" />
     <None Include="MonoGame.ImGui\obj\Debug\MonoGame.ImGui.csproj.CoreCompileInputs.cache" />
@@ -390,17 +332,11 @@
     <PackageReference Include="MonoGame.Extended">
       <Version>3.8.0</Version>
     </PackageReference>
-    <PackageReference Include="MonoGame.Extended.Content.Pipeline">
-      <Version>3.8.0</Version>
-    </PackageReference>
     <PackageReference Include="MonoGame.Extended.Gui">
       <Version>3.8.0</Version>
     </PackageReference>
     <PackageReference Include="MonoGame.Extended.Input">
       <Version>3.8.0</Version>
-    </PackageReference>
-    <PackageReference Include="MonoGame.Framework.DesktopGL">
-      <Version>3.8.0.1641</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -410,140 +346,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\CrimsonEngine.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\CrimsonEngine.pdb" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\Microsoft.Win32.Primitives.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\MonoGame.Extended.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\MonoGame.Extended.Input.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\MonoGame.Framework.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\MonoGame.QuakeConsole.DesktopGL.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\MonoGame.QuakeConsole.DesktopGL.pdb" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\MonoGame.QuakeConsole.DesktopGL.xml" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\MonoGame.QuakeConsole.ManualInterpreter.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\MonoGame.QuakeConsole.ManualInterpreter.pdb" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\MonoGame.QuakeConsole.ManualInterpreter.xml" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\netstandard.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\Newtonsoft.Json.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\SimpleGame.exe" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\SimpleGame.pdb" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.AppContext.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Collections.Concurrent.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Collections.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Collections.NonGeneric.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Collections.Specialized.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.ComponentModel.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.ComponentModel.EventBasedAsync.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.ComponentModel.Primitives.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.ComponentModel.TypeConverter.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Console.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Data.Common.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Diagnostics.Contracts.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Diagnostics.Debug.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Diagnostics.FileVersionInfo.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Diagnostics.Process.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Diagnostics.StackTrace.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Diagnostics.TextWriterTraceListener.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Diagnostics.Tools.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Diagnostics.TraceSource.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Diagnostics.Tracing.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Drawing.Primitives.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Dynamic.Runtime.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Globalization.Calendars.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Globalization.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Globalization.Extensions.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.IO.Compression.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.IO.Compression.ZipFile.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.IO.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.IO.FileSystem.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.IO.FileSystem.DriveInfo.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.IO.FileSystem.Primitives.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.IO.FileSystem.Watcher.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.IO.IsolatedStorage.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.IO.MemoryMappedFiles.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.IO.Pipes.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.IO.UnmanagedMemoryStream.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Linq.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Linq.Expressions.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Linq.Parallel.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Linq.Queryable.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Net.Http.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Net.NameResolution.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Net.NetworkInformation.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Net.Ping.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Net.Primitives.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Net.Requests.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Net.Security.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Net.Sockets.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Net.WebHeaderCollection.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Net.WebSockets.Client.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Net.WebSockets.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.ObjectModel.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Reflection.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Reflection.Extensions.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Reflection.Primitives.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Resources.Reader.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Resources.ResourceManager.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Resources.Writer.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Runtime.CompilerServices.VisualC.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Runtime.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Runtime.Extensions.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Runtime.Handles.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Runtime.InteropServices.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Runtime.InteropServices.RuntimeInformation.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Runtime.Numerics.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Runtime.Serialization.Formatters.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Runtime.Serialization.Json.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Runtime.Serialization.Primitives.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Runtime.Serialization.Xml.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Security.Claims.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Security.Cryptography.Algorithms.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Security.Cryptography.Csp.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Security.Cryptography.Encoding.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Security.Cryptography.Primitives.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Security.Cryptography.X509Certificates.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Security.Principal.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Security.SecureString.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Text.Encoding.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Text.Encoding.Extensions.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Text.RegularExpressions.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Threading.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Threading.Overlapped.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Threading.Tasks.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Threading.Tasks.Parallel.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Threading.Thread.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Threading.ThreadPool.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Threading.Timer.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.ValueTuple.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Xml.ReaderWriter.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Xml.XDocument.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Xml.XmlDocument.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Xml.XmlSerializer.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Xml.XPath.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\System.Xml.XPath.XDocument.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\x64\SDL2.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\x64\soft_oal.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\x86\SDL2.dll" />
-    <Content Include="bin\DesktopGL\AnyCPU\Debug\x86\soft_oal.dll" />
     <Content Include="Content\pixel.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\sprites\amiga_mouse_cursor.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\xml_data\events.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\xml_data\items.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="bin\DesktopGL\Content\" />
-    <Folder Include="Content\bin\DesktopGL\fonts\" />
-    <Folder Include="Content\bin\DesktopGL\sprites\" />
-    <Folder Include="Content\bin\fonts\" />
-    <Folder Include="Content\bin\sprites\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
