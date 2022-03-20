@@ -1,0 +1,54 @@
+﻿{
+  "00_rooms": [
+    {
+      "id": "ROOM.001",
+      "name": "Sacred room",
+      "descriptions": [
+        "Not very big room with a stone altar of sorts and a carped near the wall.",
+        "Looks like a ritual room. Over the stone altar hangs a wierd piece of jewelery. You can't quite figure out what could it be and for what porpouse."
+      ],
+      "items": [],
+      "events": [],
+      "directions": [
+        "DOOR.009 ROOM.0AF"
+      ]
+    },
+    {
+      "id": "ROOM.0AF",
+      "name": "Deset well",
+      "descriptions": [
+        "What a sight... Just and old plain well made of stone bricks, a stone in the sand. In the distance you can see a large \"triangle\"."
+      ],
+      "items": [
+        { "id":"ITEM.0001" },
+        {
+          "id": "ITEM.0A04 STONE",
+          "dimensions": "10;40",
+          "active_region": [
+            "0;0",
+            "10;0",
+            "10;5"
+          ]
+        }
+      ],
+      "events": [
+        "eating a stone"
+      ],
+      "directions": [
+        "SOUTH ROOM.001",
+        "NORTH ROOM.F00"
+      ]
+    },
+    {
+      "id": "ROOM.F00",
+      "name": "View on the piramid",
+      "descriptions": [
+        "Before your ery eyes you see impressive piramid made ages or centuries ago by unknown hands. You can feel the mistery in the air.",
+        "Monumental building made eons ago. You wonder, who could build such thing? You still wonder..."
+      ],
+      "items": [],
+      "events": [],
+      "directions": []
+    }
+  ]
+}

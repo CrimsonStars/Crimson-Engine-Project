@@ -1,4 +1,5 @@
-﻿using CrimsonEngine.Simple_math;
+﻿using CrimsonEngine.Globals;
+using CrimsonEngine.Simple_math;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;

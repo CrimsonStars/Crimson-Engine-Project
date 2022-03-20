@@ -4,6 +4,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Input;
 using CrimsonEngine.Graphics.GUI;
+using CrimsonEngine.Globals;
+using CrimsonEngine.Misc;
+using System.Collections.Generic;
 
 namespace CrimsonEngine.GL
 {
@@ -16,49 +19,10 @@ namespace CrimsonEngine.GL
         //private ImGuiDebug DebugGui;
 
         private GuiContainer2D guiCont;
-
-
-        SpriteFont sf;
-        KeyboardState previousKS, newKS;
         TajmerTemp tt;
-        MouseStateExtended LastMS, CurrentMS;
 
-        KeyboardStateExtended newKSE, oldKSE;
+        private List<BasicFont> LabelsToDraw;
 
-
-
-        void updateKeyboardAndMouseState()
-        {
-            previousKS = newKS;
-            newKS = Keyboard.GetState();
-            oldKSE = newKSE;
-            newKSE = KeyboardExtended.GetState();
-
-            //WasMouseClicked = 
-            //    CurrentMS.IsButtonDown(MouseButton.Left) && !LastMS.IsButtonDown(MouseButton.Left);
-            
-            LastMS = CurrentMS;
-            CurrentMS = MonoGame.Extended.Input.MouseExtended.GetState();
-        }
-
-        bool WasPresed(Keys key)
-        {
-            return newKS.IsKeyDown(key) && !previousKS.IsKeyDown(key);
-        }
-
-        bool EqualKeyboardStates(KeyboardState A, KeyboardState B)
-        {
-            if (A.GetPressedKeys().Length == B.GetPressedKeys().Length)
-            {
-                for (int i = 0; i < A.GetPressedKeys().Length; i++)
-                {
-                    if (A.GetPressedKeys()[i] == B.GetPressedKeys()[i])
-                        return false;
-                }
-            }
-
-            return true;
-        }
 
         public SimpleGame()
         {
@@ -68,8 +32,6 @@ namespace CrimsonEngine.GL
             _graphics.ApplyChanges();
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-
-
 
             LibGlobals.LibGraphicsDeviceManager = _graphics;
 
@@ -81,6 +43,8 @@ namespace CrimsonEngine.GL
             //TargetElapsedTime = TimeSpan.FromSeconds(1.0 / PropertiesInstance.Framerate);
 
             //tt.Start();
+
+            LabelsToDraw = new List<BasicFont>();
 
             TotalFrameCount = 0;
         }
@@ -99,10 +63,7 @@ namespace CrimsonEngine.GL
             LibGlobals.LibSpriteBatch = _spriteBatch;
             LibGlobals.LibContentManager = Content;
 
-            Mouse.SetCursor(
-                MouseCursor.FromTexture2D(Content.Load<Texture2D>(@"sprites\amiga_mouse_cursor"),
-                0, 0)
-                );
+            Mouse.SetCursor(MouseCursor.FromTexture2D(Content.Load<Texture2D>(@"sprites\amiga_mouse_cursor"), 0, 0));
 
             GameWorld = new World();
             GameWorld.GenerateWorld();
@@ -112,26 +73,19 @@ namespace CrimsonEngine.GL
 
         protected override void Update(GameTime gameTime)
         {
-            var PressedKeys = newKS.GetPressedKeys();
-
             GameWorld.Update();
             guiCont.Update();
 
             #region Manage inputs (keyboard or mouse)
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || newKS.IsKeyDown(Keys.Escape)
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
                 || GameWorld.GAME_STATE == GameStates.EXIT)
             {
                 Exit();
-            } else
-            {
-                GameWorld.Update();
             }
-            
 
-            updateKeyboardAndMouseState();
-            #endregion
-
+            GameWorld.Update();
             base.Update(gameTime);
+            #endregion
         }
 
         protected override void Draw(GameTime gameTime)
@@ -157,7 +111,6 @@ namespace CrimsonEngine.GL
 
 
             guiCont.Draw();
-
             base.Draw(gameTime);
             _spriteBatch.End();
 

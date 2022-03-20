@@ -1,0 +1,96 @@
+﻿{
+  "items_001": [
+    {
+      // item template
+      "id": "NULL_ITEM",
+      "name": "NULL_ITEM_NAME",
+      "descriptions": [
+        "NULL_DESC_0",
+        "NULL_DESC_1",
+        "NULL_DESC_2"
+      ],
+      "sprite_filename": "NULL_FILE_NAME.png",
+      "weight": 0.0,
+      "value": 0.0
+    },
+    {
+      "id": "ITEM_3F",
+      "name": "Hammer",
+      "descriptions": [
+        "Usefull tool for hitting objects.",
+        "A stick with an solid iron head.",
+        "Can't tounch this?"
+      ],
+      "sprite_filename": "hammer.png",
+      "weight": 1.0,
+      "value": 5.0
+    },
+    {
+      "id": "ITEM_KNIFE_BB",
+      "name": "Rusty knife",
+      "descriptions": [
+        "A very rusty knife.",
+        "This knife is rusty and useless."
+      ],
+      "sprite_filename": "knife_rusty.png",
+      "weight": 0.02,
+      "value": 0.03
+    },
+    {
+      "id": "ITEM_KNIFE_0F_OK",
+      "name": "Sharp knife",
+      "descriptions": [
+        "Tool with a sharp edge.",
+        "Still a little rusty, but cust well.",
+        "Not as sharp as it could be, but it'll do for now."
+      ],
+      "sprite_filename": "knife_non_rusty.png",
+      "weight": 0.02,
+      "value": 0.2
+    },
+    {
+      "id": "ITEM_00_SHARPENER",
+      "name": "Tabletop sharpener",
+      "descriptions": [
+        "Piece of stone used for changing ones sharpness.",
+        "It's an ol' plain sharpener."
+      ],
+      "weight": 0.3,
+      "value": 7.5
+    },
+    {
+      "id": "item_screw_driver",
+      "name": "Screw driver",
+      "descriptions": [
+        "A screw-driver - nothing else to add",
+        "Drive your screw to victory.",
+        "A simple screw-driver."
+      ],
+      "sprite_filename": "screw_driver.png",
+      "weight": 0.15,
+      "value": 2.0
+    },
+    {
+      "id": "item_wrench",
+      "name": "Wrench",
+      "descriptions": [
+        "Wrench... What else can I say?",
+        "A wrench."
+      ],
+      "sprite_filename": "wrench_beta.png",
+      "weight": 0.4,
+      "value": 3.0
+    },
+    {
+      "id": "item_nail_taken_out_00F",
+      "name": "Iron nail",
+      "descriptions": [
+        "This nail is bended a little, but works.",
+        "No rust on this item. It's bended but in good shape."
+      ],
+      "sprite_filename": "nailf_from_fence.png",
+      "weight": 0.0,
+      "value": 0.03
+    }
+  ]
+}

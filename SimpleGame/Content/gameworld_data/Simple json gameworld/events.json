@@ -1,0 +1,19 @@
+﻿{
+  "events": [
+    {
+      // True example
+      // The player uses the hammer (ID: hammer_3f) on himself and taked damage
+      // stupid, but... it's and example
+      "eating a stone": {
+        "action": "EAT|ITEM.0A04 STONE;", // self - special ID representing player
+        "result": [
+          "ADD_HEALTH|-2;TEXT|That was VERY unsmart decision."
+        ] // MULTIPLE
+      },
+      "no desc": {
+        "action": [ "" ],
+        "reaction": [ "" ]
+      }
+    }
+  ]
+}

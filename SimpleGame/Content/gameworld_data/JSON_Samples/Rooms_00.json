@@ -1,0 +1,24 @@
+﻿{
+  "Rooms_00": [
+    {
+      // template room
+      "id": "id of the room",
+      "name": "name of the room",
+      "descriptions": [
+        "just descriptions of the room."
+      ],
+      "items": [
+        "item_id_0",
+        "item_id_1",
+        "item_id_2"
+      ],
+      "events": [
+        "event id - 0",
+        "event id - 1"
+      ],
+      "directions": [
+        
+      ]
+    }
+  ]
+}
