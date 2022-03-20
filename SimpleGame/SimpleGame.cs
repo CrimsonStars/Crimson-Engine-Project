@@ -70,8 +70,6 @@ namespace CrimsonEngine.GL
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
-
-
             LibGlobals.LibGraphicsDeviceManager = _graphics;
 
             //tt = new TajmerTemp(.350f);
@@ -100,10 +98,7 @@ namespace CrimsonEngine.GL
             LibGlobals.LibSpriteBatch = _spriteBatch;
             LibGlobals.LibContentManager = Content;
 
-            Mouse.SetCursor(
-                MouseCursor.FromTexture2D(Content.Load<Texture2D>(@"sprites\amiga_mouse_cursor"),
-                0, 0)
-                );
+            Mouse.SetCursor(MouseCursor.FromTexture2D(Content.Load<Texture2D>(@"sprites\amiga_mouse_cursor"), 0, 0));
 
             GameWorld = new World();
             GameWorld.GenerateWorld();
@@ -158,7 +153,6 @@ namespace CrimsonEngine.GL
 
 
             guiCont.Draw();
-
             base.Draw(gameTime);
             _spriteBatch.End();
 
