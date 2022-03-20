@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Input\**" />
+    <EmbeddedResource Remove="Input\**" />
+    <None Remove="Input\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MonoGame.Extended" Version="3.8.0" />
   </ItemGroup>
 
