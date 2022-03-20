@@ -7,6 +7,9 @@ using SimpleGame.Game_objects.GUI;
 using CrimsonEngine.Graphics.GUI;
 using CrimsonEngine.Globals.Inputs;
 using System;
+using CrimsonEngine.Globals;
+using CrimsonEngine.Misc;
+using System.Collections.Generic;
 
 namespace CrimsonEngine.GL
 {
@@ -19,13 +22,10 @@ namespace CrimsonEngine.GL
         //private ImGuiDebug DebugGui;
 
         private GuiContainer2D guiCont;
+        TajmerTemp tt;
 
-        //TajmerTemp tt;
+        private List<BasicFont> LabelsToDraw;
 
-        #region Testing grounds... yup.
-        MouseInput MouseInstance;
-        KeyboardInput KeyboardInstance;
-        #endregion
 
         public SimpleGame()
         {
@@ -66,10 +66,7 @@ namespace CrimsonEngine.GL
             LibGlobals.LibSpriteBatch = _spriteBatch;
             LibGlobals.LibContentManager = Content;
 
-            Mouse.SetCursor(
-                MouseCursor.FromTexture2D(Content.Load<Texture2D>(@"sprites\amiga_mouse_cursor"),
-                0, 0)
-                );
+            Mouse.SetCursor(MouseCursor.FromTexture2D(Content.Load<Texture2D>(@"sprites\amiga_mouse_cursor"), 0, 0));
 
             GameWorld = new World();
             guiCont = new GuiContainer2D();
@@ -84,8 +81,7 @@ namespace CrimsonEngine.GL
 
             #region Manage inputs (keyboard or mouse)
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
-                || GameWorld.GAME_STATE == GameStates.EXIT
-                )
+                || GameWorld.GAME_STATE == GameStates.EXIT)
             {
                 Exit();
             }

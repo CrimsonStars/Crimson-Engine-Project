@@ -1,0 +1,35 @@
+﻿{
+  "items_001": [
+    {
+      "id": "ITEM.0001",
+      "name": "Stone well",
+      "descriptions": [
+        "A well fillled to the brim with sand and little rocks. Could this be a some sort of planned action? Who knows..."
+      ],
+      "sprite_filename": "oh_well.png",
+      "weight": 0.0,
+      "value": 0.0
+    },
+    {
+      "id": "ITEM.0A04 STONE",
+      "name": "Large stone",
+      "descriptions": [
+        "There are some markings or writings on that one! Unfortunetly, you can't make out from what's written down.",
+        "A stone with lots of symbols. You don't recognize the language or font."
+      ],
+      "sprite_filename": "desert_largeStone.png",
+      "weight": 52.0,
+      "value": 1000.0
+    },
+    {
+      "id": "ITEM.TEMPLATE_ITEM",
+      "name": "Template item",
+      "descriptions": [
+        "I have no description.",
+        "Imma dummy item."
+      ],
+      "weight": 69.0,
+      "value": 3.14
+    }
+  ]
+}

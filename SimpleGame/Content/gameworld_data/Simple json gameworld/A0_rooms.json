@@ -1,0 +1,16 @@
+﻿{
+  "A0_rooms": [
+    {
+      "id": "ROOM.0ab",
+      "name": "Temporary room",
+      "descriptions": [
+        "Nothing is here and nithing will be here."
+
+      ],
+      "items": [],
+      "events": [],
+      "directions": [
+      ]
+    }
+  ]
+}

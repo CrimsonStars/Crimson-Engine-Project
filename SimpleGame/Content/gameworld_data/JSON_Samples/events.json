@@ -1,0 +1,35 @@
+﻿{
+  "events": [
+    {
+      "name or description": {
+        // serpatation of commands is done via 
+        // '|' - different commands/id/text separated
+
+        "action": "action command;", // JUST ONE FOR NOW
+        "result": [
+          "result commands",
+          "each one stored in this array"
+        ]
+      }
+    },
+    {
+      // True example
+      // The player uses the hammer (ID: hammer_3f) on himself and taked damage
+      // stupid, but... it's and example
+      "name or description": {
+        "action": "USE|hammer_3f|ON|self;", // self - special ID representing player
+        "result": [ "ADD_HEALTH|-2", 
+                    "TEXT|That was VERY unsmart decision." ] // MULTIPLE
+      }
+    },
+    {
+      // you can sharpen the knife
+      "action": "USE|knife_item_bb|ON|item_00_sharpener;",
+      "result": [
+        "GIVE|item_knife_0f_ok",
+        "REMOVE|knife_item_bb",
+        "TEXT|Blah, blah, blah...\\Sharp knife, blah, blah, blah..."
+      ]
+    }
+  ]
+}
