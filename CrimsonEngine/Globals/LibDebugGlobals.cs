@@ -25,24 +25,25 @@ namespace CrimsonEngine.Globals
         {
             Random rnd = new Random();
             string result = "";
-            int randomNumber = -1;
 
-
-            if(!wasInitialised)
+            if (!wasInitialised)
             {
                 InitializeAllElements();
                 wasInitialised = true;
             }
-            
+
+            int randomNumber;
             do
             {
                 randomNumber = rnd.Next(0, fontsList.Count);
                 lastRandomisedNumber = randomNumber;
-            } 
+            }
             while (randomNumber != lastRandomisedNumber);
 
-
-            if(!fontsList.Any()) return result;
+            if (!fontsList.Any())
+            {
+                return result;
+            }
 
             return fontsList.ElementAtOrDefault(randomNumber).path;
         }

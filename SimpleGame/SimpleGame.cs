@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Input;
 using CrimsonEngine.Graphics.GUI;
+using CrimsonEngine.Globals.Inputs;
+using System;
 using CrimsonEngine.Globals;
 using CrimsonEngine.Misc;
 using System.Collections.Generic;
@@ -44,8 +46,6 @@ namespace CrimsonEngine.GL
 
             //tt.Start();
 
-            LabelsToDraw = new List<BasicFont>();
-
             TotalFrameCount = 0;
         }
 
@@ -53,6 +53,8 @@ namespace CrimsonEngine.GL
         {
             // TODO: Add your initialization logic here
             //DebugGui = new ImGuiDebug(this);
+
+            Console.Title = "CRIMSON ENGINE (ver 0.0.1) - DEBUG COSOLE (OUTPUT ONLY)";
 
             base.Initialize();
         }
@@ -66,9 +68,9 @@ namespace CrimsonEngine.GL
             Mouse.SetCursor(MouseCursor.FromTexture2D(Content.Load<Texture2D>(@"sprites\amiga_mouse_cursor"), 0, 0));
 
             GameWorld = new World();
-            GameWorld.GenerateWorld();
-
             guiCont = new GuiContainer2D();
+
+            GameWorld.GenerateWorld();
         }
 
         protected override void Update(GameTime gameTime)
@@ -83,7 +85,32 @@ namespace CrimsonEngine.GL
                 Exit();
             }
 
+            #region Example usage of inputs (keyboard & mouse)
+            if (Inputs.GetInstance().WasKeyboardKeyPressed(Keys.W))
+            {
+                Console.WriteLine("W");
+            }
+            
+            if (Inputs.GetInstance().IsKeyboardKeyPressed(Keys.Up))
+            {
+                Console.WriteLine("Up");
+            }
+
+            if (Inputs.GetInstance().WasMouseButtonPressed(MouseButton.Left))
+            {
+                Console.WriteLine("LEFT MOUSE BUTTON");
+            }
+
+            if (Inputs.GetInstance().IsKeyboardKeyPressed(Keys.Escape))
+            {
+                Exit();
+            }
+            #endregion
+            #endregion
+
+            #region Updates
             GameWorld.Update();
+            Inputs.GetInstance().Update();
             base.Update(gameTime);
             #endregion
         }
@@ -100,6 +127,7 @@ namespace CrimsonEngine.GL
             GameWorld.Draw();
             guiCont.Draw();
 
+#if DEBUG
             TotalFrameCount++;
             if (TotalFrameCount % 30 == 0)
             {
@@ -108,12 +136,11 @@ namespace CrimsonEngine.GL
                 Window.Title = $"Crimson game - {instance.Version} ({framesPerSecond} fps)";
                 TotalFrameCount = 0;
             }
-
+#endif
 
             guiCont.Draw();
             base.Draw(gameTime);
             _spriteBatch.End();
-
             
             //SimpleMlemGui.Draw(gameTime, _spriteBatch);
             //Console.Write($"Elapsed time:\t{gameTime.ElapsedGameTime}\r");

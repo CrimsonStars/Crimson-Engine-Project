@@ -26,5 +26,10 @@ namespace CrimsonEngine.Simple_math
         {
             return new Vector2(p.X, p.Y);
         }
+
+        public static implicit operator Point2D(Point p)
+        {
+            return new Point2D(p.X, p.Y);
+        }
     }
 }
