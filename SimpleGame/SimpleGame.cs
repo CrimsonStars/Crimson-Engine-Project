@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Input;
-using SimpleGame.Game_objects.GUI;
 using CrimsonEngine.Graphics.GUI;
 using CrimsonEngine.Globals.Inputs;
 using System;

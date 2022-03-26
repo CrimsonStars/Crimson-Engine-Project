@@ -11,124 +11,18 @@
 #-------------------------------- References --------------------------------#
 
 /reference:..\..\..\..\..\.nuget\packages\monogame.extended.content.pipeline\3.8.0\tools\MonoGame.Extended.Content.Pipeline.dll
+/reference:..\..\..\..\..\.nuget\packages\monogame.extended\3.8.0\lib\netstandard2.0\MonoGame.Extended.dll
 
 #---------------------------------- Content ---------------------------------#
 
-#begin fonts/Consolas_16_px.fnt
-/importer:BitmapFontImporter
-/processor:BitmapFontProcessor
-/build:fonts/Consolas_16_px.fnt
-
-#begin fonts/Consolas_16_px_0.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:fonts/Consolas_16_px_0.png
-
-#begin fonts/pixeloid_12.fnt
-/importer:BitmapFontImporter
-/processor:BitmapFontProcessor
-/build:fonts/pixeloid_12.fnt
-
-#begin fonts/pixeloid_12_0.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:fonts/pixeloid_12_0.png
-
-#begin fonts/pixeloid_24.fnt
-/importer:BitmapFontImporter
-/processor:BitmapFontProcessor
-/build:fonts/pixeloid_24.fnt
-
-#begin fonts/pixeloid_24_0.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:fonts/pixeloid_24_0.png
-
-#begin fonts/pixeloid_32.fnt
-/importer:BitmapFontImporter
-/processor:BitmapFontProcessor
-/build:fonts/pixeloid_32.fnt
-
-#begin fonts/pixeloid_32_0.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:fonts/pixeloid_32_0.png
-
 #begin fonts/pixeloid_32_bold.fnt
-/importer:BitmapFontImporter
-/processor:BitmapFontProcessor
-/build:fonts/pixeloid_32_bold.fnt
+/copy:fonts/pixeloid_32_bold.fnt
 
 #begin fonts/pixeloid_32_bold_0.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:fonts/pixeloid_32_bold_0.png
+/copy:fonts/pixeloid_32_bold_0.png
 
 #begin fonts/Pixeloid_license.txt
 /copy:fonts/Pixeloid_license.txt
-
-#begin fonts/PixeloidMono_regular_10.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:fonts/PixeloidMono_regular_10.spritefont
-
-#begin fonts/PixeloidMono_regular_12.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:fonts/PixeloidMono_regular_12.spritefont
-
-#begin fonts/PixeloidMono_regular_18.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:fonts/PixeloidMono_regular_18.spritefont
-
-#begin fonts/PixeloidMono_regular_8.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:fonts/PixeloidMono_regular_8.spritefont
 
 #begin sprites/amiga_mouse_cursor.png
 /importer:TextureImporter
